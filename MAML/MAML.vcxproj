@@ -25,7 +25,7 @@
     <ClInclude Include="MAML\src\hyperbolic\hyperbolic.hpp" />
     <ClInclude Include="MAML\src\memory\allocation.hpp" />
     <ClInclude Include="MAML\src\memory\types.hpp" />
-    <ClInclude Include="MAML\src\simd\simd.hpp" />
+    <ClInclude Include="MAML\src\simd\vector.hpp" />
     <ClInclude Include="MAML\src\vector\vector.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

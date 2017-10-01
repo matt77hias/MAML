@@ -29,7 +29,7 @@ namespace maml {
 
 		constexpr explicit Complex(T xy = 0) noexcept
 			: Complex(xy, xy) {}
-		constexpr explicit Complex(T x, T y) noexcept
+		constexpr Complex(T x, T y) noexcept
 			: Vector2(x, y) {}
 		constexpr Complex(const Complex< T > &v) noexcept = default;
 		constexpr Complex(Complex< T > &&v) noexcept = default;

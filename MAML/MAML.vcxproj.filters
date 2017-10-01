@@ -57,7 +57,7 @@
     <ClInclude Include="MAML\src\hyperbolic\hyperbolic.hpp">
       <Filter>Header Files\hyperbolic</Filter>
     </ClInclude>
-    <ClInclude Include="MAML\src\simd\simd.hpp">
+    <ClInclude Include="MAML\src\simd\vector.hpp">
       <Filter>Header Files\simd</Filter>
     </ClInclude>
   </ItemGroup>

@@ -29,7 +29,7 @@ namespace maml {
 
 		constexpr explicit Hyperbolic(T xy = 0) noexcept
 			: Hyperbolic(xy, xy) {}
-		constexpr explicit Hyperbolic(T x, T y) noexcept
+		constexpr Hyperbolic(T x, T y) noexcept
 			: Vector2(x, y) {}
 		constexpr Hyperbolic(const Hyperbolic< T > &v) noexcept = default;
 		constexpr Hyperbolic(Hyperbolic< T > &&v) noexcept = default;

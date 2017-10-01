@@ -43,7 +43,7 @@ namespace maml {
 
 		constexpr explicit Vector2(T xy = 0) noexcept
 			: Vector2(xy, xy) {}
-		constexpr explicit Vector2(T x, T y) noexcept
+		constexpr Vector2(T x, T y) noexcept
 			: m_x(x), m_y(y) {}
 		constexpr Vector2(const Vector2 &v) noexcept = default;
 		constexpr Vector2(Vector2 &&v) noexcept = default;
@@ -117,7 +117,7 @@ namespace maml {
 
 		constexpr explicit Vector3(T xyz = 0) noexcept
 			: Vector3(xyz, xyz, xyz) {}
-		constexpr explicit Vector3(T x, T y, T z) noexcept
+		constexpr Vector3(T x, T y, T z) noexcept
 			: m_x(x), m_y(y), m_z(z) {}
 		constexpr explicit Vector3(const Vector2< T > &v, T z = 0) noexcept
 			: Vector3(v.m_x, v.m_y, z) {}
@@ -195,7 +195,7 @@ namespace maml {
 
 		constexpr explicit Vector4(T xyzw = 0) noexcept
 			: Vector4(xyzw, xyzw, xyzw, xyzw) {}
-		constexpr explicit Vector4(T x, T y, T z, T w) noexcept
+		constexpr Vector4(T x, T y, T z, T w) noexcept
 			: m_x(x), m_y(y), m_z(z), m_w(w) {}
 		constexpr explicit Vector4(const Vector2< T > &v, T z = 0, T w = 0) noexcept
 			: Vector3(v.m_x, v.m_y, z, w) {}
@@ -281,7 +281,7 @@ namespace maml {
 
 		constexpr explicit Vector2A(T xy = 0) noexcept
 			: Vector2A(xy, xy) {}
-		constexpr explicit Vector2A(T x, T y) noexcept
+		constexpr Vector2A(T x, T y) noexcept
 			: m_x(x), m_y(y) {}
 		constexpr Vector2A(const Vector2A &v) noexcept = default;
 		constexpr Vector2A(Vector2A &&v) noexcept = default;
@@ -364,7 +364,7 @@ namespace maml {
 
 		constexpr explicit Vector3A(T xyz = 0) noexcept
 			: Vector3A(xyz, xyz, xyz) {}
-		constexpr explicit Vector3A(T x, T y, T z) noexcept
+		constexpr Vector3A(T x, T y, T z) noexcept
 			: m_x(x), m_y(y), m_z(z) {}
 		constexpr explicit Vector3A(const Vector2< T >  &v, T z = 0) noexcept
 			: Vector3A(v.m_x, v.m_y, z) {}
@@ -454,7 +454,7 @@ namespace maml {
 
 		constexpr explicit Vector4A(T xyzw = 0) noexcept
 			: Vector4A(xyzw, xyzw, xyzw, xyzw) {}
-		constexpr explicit Vector4A(T x, T y, T z, T w) noexcept
+		constexpr Vector4A(T x, T y, T z, T w) noexcept
 			: m_x(x), m_y(y), m_z(z), m_w(w) {}
 		constexpr explicit Vector4A(const Vector2< T >  &v, T z = 0, T w = 0) noexcept
 			: Vector4A(v.m_x, v.m_y, z, w) {}

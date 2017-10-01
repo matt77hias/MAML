@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "simd\simd.hpp"
+#include "simd\vector.hpp"
 #include "complex\complex.hpp"
 #include "dual\dual.hpp"
 #include "hyperbolic\hyperbolic.hpp"

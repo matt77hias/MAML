@@ -29,7 +29,7 @@ namespace maml {
 
 		constexpr explicit Dual(T xy = 0) noexcept
 			: Dual(xy, xy) {}
-		constexpr explicit Dual(T x, T y) noexcept
+		constexpr Dual(T x, T y) noexcept
 			: Vector2(x, y) {}
 		constexpr Dual(const Dual< T > &v) noexcept = default;
 		constexpr Dual(Dual< T > &&v) noexcept = default;
