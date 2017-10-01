@@ -8,3 +8,16 @@
 # MAML - Matthias Advanced Math Library
 
 ## About
+
+## Features
+
+* Complex Numbers
+* Dual Numbers
+* Hyperbolic Numbers
+* SIMD (*work in progress*)
+
+To Do's:
+
+* Quaternion
+* Grassmann Algebra
+* Geometric Algebra
