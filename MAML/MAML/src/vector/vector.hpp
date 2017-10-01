@@ -33,7 +33,7 @@ namespace maml {
 
 	template< typename T >
 	struct Vector2< T, 
-		typename std::enable_if< std::is_pod< T >::value, void >::type> {
+		typename std::enable_if< std::is_arithmetic< T >::value, void >::type> {
 
 	public:
 
@@ -107,7 +107,7 @@ namespace maml {
 
 	template< typename T >
 	struct Vector3< T, 
-		typename std::enable_if< std::is_pod< T >::value, void >::type> {
+		typename std::enable_if< std::is_arithmetic< T >::value, void >::type> {
 
 	public:
 
@@ -185,7 +185,7 @@ namespace maml {
 
 	template< typename T >
 	struct Vector4< T, 
-		typename std::enable_if< std::is_pod< T >::value, void >::type> {
+		typename std::enable_if< std::is_arithmetic< T >::value, void >::type> {
 
 	public:
 
@@ -270,7 +270,7 @@ namespace maml {
 
 	template< typename T >
 	struct __declspec(align(16)) Vector2A< T, 
-		typename std::enable_if< std::is_pod< T >::value, void >::type> 
+		typename std::enable_if< std::is_arithmetic< T >::value, void >::type>
 		: public AlignedData< Vector2A< T > > {
 
 	public:
@@ -353,7 +353,7 @@ namespace maml {
 
 	template< typename T >
 	struct __declspec(align(16)) Vector3A< T, 
-		typename std::enable_if< std::is_pod< T >::value, void >::type> 
+		typename std::enable_if< std::is_arithmetic< T >::value, void >::type>
 		: public AlignedData< Vector3A< T > > {
 
 	public:
@@ -443,7 +443,7 @@ namespace maml {
 
 	template< typename T >
 	struct __declspec(align(16)) Vector4A< T, 
-		typename std::enable_if< std::is_pod< T >::value, void >::type> 
+		typename std::enable_if< std::is_arithmetic< T >::value, void >::type>
 		: public AlignedData< Vector4A< T > > {
 
 	public:
