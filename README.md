@@ -9,6 +9,12 @@
 
 ## About
 
+## Development
+* **Platform**: (minimum) Windows 8.1 32 Bit and 64 Bit
+* **Engine Programming Language**: ISO C++ Latest Draft Standard (> C++17)
+* **Compiler**: MSVC++ 14.0
+* **IDE**: Visual Studio 2017
+
 ## Features
 
 * Complex Numbers
