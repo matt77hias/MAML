@@ -19,5 +19,5 @@
 To Do's:
 
 * Quaternion
-* Grassmann Algebra
-* Geometric Algebra
+* Grassmann Algebra (wedge and anti-wedge support)
+* Geometrical Algebra
