@@ -15,7 +15,7 @@
 //-----------------------------------------------------------------------------
 #pragma region
 
-#include <xmmintrin.h>
+#include <algorithm>
 
 #pragma endregion
 
@@ -28,8 +28,12 @@ namespace maml {
 	// Declarations and Definitions: Vector2
 	//-------------------------------------------------------------------------
 
+	template< typename T, typename Enable = void >
+	struct Vector2;
+
 	template< typename T >
-	struct Vector2 {
+	struct Vector2< T, 
+		typename std::enable_if< std::is_pod< T >::value, void >::type> {
 
 	public:
 
@@ -41,20 +45,29 @@ namespace maml {
 			: Vector2(xy, xy) {}
 		constexpr explicit Vector2(T x, T y) noexcept
 			: m_x(x), m_y(y) {}
-		constexpr Vector2(const Vector2< T > &v) noexcept = default;
-		constexpr Vector2(Vector2< T > &&v) noexcept = default;
+		constexpr Vector2(const Vector2 &v) noexcept = default;
+		constexpr Vector2(Vector2 &&v) noexcept = default;
+		template< typename U >
+		constexpr explicit Vector2(const Vector2< U > &v) noexcept
+			: Vector2(
+				static_cast< T >(v.m_x),
+				static_cast< T >(v.m_y)) {}
 		~Vector2() = default;
 
 		//---------------------------------------------------------------------
 		// Assignment Operators
 		//---------------------------------------------------------------------
 
-		constexpr Vector2 &operator=(const Vector2< T > &v) = default;
-		constexpr Vector2 &operator=(Vector2< T > &&v) = default;
+		constexpr Vector2 &operator=(const Vector2 &v) = default;
+		constexpr Vector2 &operator=(Vector2 &&v) = default;
 
 		//---------------------------------------------------------------------
 		// Member Methods
 		//---------------------------------------------------------------------
+
+		bool HasNaNs() const noexcept {
+			return isnan(m_x) || isnan(m_y);
+		}
 
 		constexpr T operator[](size_t i) const noexcept {
 			return (&m_x)[i];
@@ -76,10 +89,12 @@ namespace maml {
 	//-------------------------------------------------------------------------
 
 	using F32x2 = Vector2< F32 >;
+	using F64x2 = Vector2< F64 >;
 	using S32x2 = Vector2< S32 >;
 	using U32x2 = Vector2< U32 >;
 
 	static_assert(sizeof(F32x2) == 8);
+	static_assert(sizeof(F64x2) == 16);
 	static_assert(sizeof(S32x2) == 8);
 	static_assert(sizeof(U32x2) == 8);
 
@@ -87,8 +102,12 @@ namespace maml {
 	// Declarations and Definitions: Vector3
 	//-------------------------------------------------------------------------
 
+	template< typename T, typename Enable = void >
+	struct Vector3;
+
 	template< typename T >
-	struct Vector3 {
+	struct Vector3< T, 
+		typename std::enable_if< std::is_pod< T >::value, void >::type> {
 
 	public:
 
@@ -102,20 +121,30 @@ namespace maml {
 			: m_x(x), m_y(y), m_z(z) {}
 		constexpr explicit Vector3(const Vector2< T > &v, T z = 0) noexcept
 			: Vector3(v.m_x, v.m_y, z) {}
-		constexpr Vector3(const Vector3< T > &v) noexcept = default;
-		constexpr Vector3(Vector3< T > &&v) noexcept = default;
+		constexpr Vector3(const Vector3 &v) noexcept = default;
+		constexpr Vector3(Vector3 &&v) noexcept = default;
+		template< typename U >
+		constexpr explicit Vector3(const Vector3< U > &v) noexcept
+			: Vector3(
+				static_cast< T >(v.m_x),
+				static_cast< T >(v.m_y),
+				static_cast< T >(v.m_z)) {}
 		~Vector3() = default;
 
 		//---------------------------------------------------------------------
 		// Assignment Operators
 		//---------------------------------------------------------------------
 
-		constexpr Vector3 &operator=(const Vector3< T > &v) = default;
-		constexpr Vector3 &operator=(Vector3< T > &&v) = default;
+		constexpr Vector3 &operator=(const Vector3 &v) = default;
+		constexpr Vector3 &operator=(Vector3 &&v) = default;
 
 		//---------------------------------------------------------------------
 		// Member Methods
 		//---------------------------------------------------------------------
+
+		bool HasNaNs() const noexcept {
+			return isnan(m_x) || isnan(m_y) || isnan(m_z);
+		}
 
 		constexpr T operator[](size_t i) const noexcept {
 			return (&m_x)[i];
@@ -138,10 +167,12 @@ namespace maml {
 	//-------------------------------------------------------------------------
 
 	using F32x3 = Vector3< F32 >;
+	using F64x3 = Vector3< F64 >;
 	using S32x3 = Vector3< S32 >;
 	using U32x3 = Vector3< U32 >;
 
 	static_assert(sizeof(F32x3) == 12);
+	static_assert(sizeof(F64x3) == 24);
 	static_assert(sizeof(S32x3) == 12);
 	static_assert(sizeof(U32x3) == 12);
 
@@ -149,8 +180,12 @@ namespace maml {
 	// Declarations and Definitions: Vector4
 	//-------------------------------------------------------------------------
 
+	template< typename T, typename Enable = void >
+	struct Vector4;
+
 	template< typename T >
-	struct Vector4 {
+	struct Vector4< T, 
+		typename std::enable_if< std::is_pod< T >::value, void >::type> {
 
 	public:
 
@@ -166,20 +201,31 @@ namespace maml {
 			: Vector3(v.m_x, v.m_y, z, w) {}
 		constexpr explicit Vector4(const Vector3< T > &v, T w = 0)
 			: Vector3(v.m_x, v.m_y, v.m_z, w) noexcept {}
-		constexpr Vector4(const Vector4< T > &v) noexcept = default;
-		constexpr Vector4(Vector4< T > &&v) noexcept = default;
+		constexpr Vector4(const Vector4 &v) noexcept = default;
+		constexpr Vector4(Vector4 &&v) noexcept = default;
+		template< typename U >
+		constexpr explicit Vector4(const Vector4< U > &v) noexcept
+			: Vector4(
+				static_cast< T >(v.m_x),
+				static_cast< T >(v.m_y),
+				static_cast< T >(v.m_z),
+				static_cast< T >(v.m_w)) {}
 		~Vector4() = default;
 
 		//---------------------------------------------------------------------
 		// Assignment Operators
 		//---------------------------------------------------------------------
 
-		constexpr Vector4 &operator=(const Vector4< T > &v) = default;
-		constexpr Vector4 &operator=(Vector4< T > &&v) = default;
+		constexpr Vector4 &operator=(const Vector4 &v) = default;
+		constexpr Vector4 &operator=(Vector4 &&v) = default;
 
 		//---------------------------------------------------------------------
 		// Member Methods
 		//---------------------------------------------------------------------
+
+		bool HasNaNs() const noexcept {
+			return isnan(m_x) || isnan(m_y) || isnan(m_z) || is_nan(m_w);
+		}
 
 		constexpr T operator[](size_t i) const noexcept {
 			return (&m_x)[i];
@@ -203,10 +249,12 @@ namespace maml {
 	//-------------------------------------------------------------------------
 
 	using F32x4 = Vector4< F32 >;
+	using F64x4 = Vector4< F64 >;
 	using S32x4 = Vector4< S32 >;
 	using U32x4 = Vector4< U32 >;
 
 	static_assert(sizeof(F32x4) == 16);
+	static_assert(sizeof(F64x4) == 32);
 	static_assert(sizeof(S32x4) == 16);
 	static_assert(sizeof(U32x4) == 16);
 
@@ -214,8 +262,16 @@ namespace maml {
 	// Declarations and Definitions: Vector2A
 	//-------------------------------------------------------------------------
 
+#pragma warning( push )
+#pragma warning( disable : 4324)
+
+	template< typename T, typename Enable = void >
+	struct __declspec(align(16)) Vector2A;
+
 	template< typename T >
-	struct __declspec(align(16)) Vector2A : public AlignedData< Vector2A< T > > {
+	struct __declspec(align(16)) Vector2A< T, 
+		typename std::enable_if< std::is_pod< T >::value, void >::type> 
+		: public AlignedData< Vector2A< T > > {
 
 	public:
 
@@ -227,20 +283,34 @@ namespace maml {
 			: Vector2A(xy, xy) {}
 		constexpr explicit Vector2A(T x, T y) noexcept
 			: m_x(x), m_y(y) {}
-		constexpr Vector2A(const Vector2A< T > &v) noexcept = default;
-		constexpr Vector2A(Vector2A< T > &&v) noexcept = default;
+		constexpr Vector2A(const Vector2A &v) noexcept = default;
+		constexpr Vector2A(Vector2A &&v) noexcept = default;
+		template< typename U >
+		constexpr explicit Vector2A(const Vector2< U > &v) noexcept
+			: Vector2A(
+				static_cast< T >(v.m_x),
+				static_cast< T >(v.m_y)) {}
+		template< typename U >
+		constexpr explicit Vector2A(const Vector2A< U > &v) noexcept
+			: Vector2A(
+				static_cast< T >(v.m_x),
+				static_cast< T >(v.m_y)) {}
 		~Vector2A() = default;
 
 		//---------------------------------------------------------------------
 		// Assignment Operators
 		//---------------------------------------------------------------------
 
-		constexpr Vector2A &operator=(const Vector2A< T > &v) = default;
-		constexpr Vector2A &operator=(Vector2A< T > &&v) = default;
+		constexpr Vector2A &operator=(const Vector2A &v) = default;
+		constexpr Vector2A &operator=(Vector2A &&v) = default;
 
 		//---------------------------------------------------------------------
 		// Member Methods
 		//---------------------------------------------------------------------
+
+		bool HasNaNs() const noexcept {
+			return isnan(m_x) || isnan(m_y);
+		}
 
 		constexpr T operator[](size_t i) const noexcept {
 			return (&m_x)[i];
@@ -256,6 +326,8 @@ namespace maml {
 		T m_x;
 		T m_y;
 	};
+
+#pragma warning( pop ) 
 
 	//-------------------------------------------------------------------------
 	// Type Declarations and Definitions: Vector2A
@@ -273,8 +345,16 @@ namespace maml {
 	// Declarations and Definitions: Vector3A
 	//-------------------------------------------------------------------------
 
+#pragma warning( push )
+#pragma warning( disable : 4324)
+
+	template< typename T, typename Enable = void >
+	struct __declspec(align(16)) Vector3A;
+
 	template< typename T >
-	struct __declspec(align(16)) Vector3A : public AlignedData< Vector3A< T > > {
+	struct __declspec(align(16)) Vector3A< T, 
+		typename std::enable_if< std::is_pod< T >::value, void >::type> 
+		: public AlignedData< Vector3A< T > > {
 
 	public:
 
@@ -286,22 +366,40 @@ namespace maml {
 			: Vector3A(xyz, xyz, xyz) {}
 		constexpr explicit Vector3A(T x, T y, T z) noexcept
 			: m_x(x), m_y(y), m_z(z) {}
+		constexpr explicit Vector3A(const Vector2< T >  &v, T z = 0) noexcept
+			: Vector3A(v.m_x, v.m_y, z) {}
 		constexpr explicit Vector3A(const Vector2A< T > &v, T z = 0) noexcept
 			: Vector3A(v.m_x, v.m_y, z) {}
-		constexpr Vector3A(const Vector3A< T > &v) noexcept = default;
-		constexpr Vector3A(Vector3A< T > &&v) noexcept = default;
+		constexpr Vector3A(const Vector3A &v) noexcept = default;
+		constexpr Vector3A(Vector3A &&v) noexcept = default;
+		template< typename U >
+		constexpr explicit Vector3A(const Vector3< U > &v) noexcept
+			: Vector3A(
+				static_cast< T >(v.m_x),
+				static_cast< T >(v.m_y),
+				static_cast< T >(v.m_z)) {}
+		template< typename U >
+		constexpr explicit Vector3A(const Vector3A< U > &v) noexcept
+			: Vector3A(
+				static_cast< T >(v.m_x),
+				static_cast< T >(v.m_y),
+				static_cast< T >(v.m_z)) {}
 		~Vector3A() = default;
 
 		//---------------------------------------------------------------------
 		// Assignment Operators
 		//---------------------------------------------------------------------
 
-		constexpr Vector3A &operator=(const Vector3A< T > &v) = default;
-		constexpr Vector3A &operator=(Vector3A< T > &&v) = default;
+		constexpr Vector3A &operator=(const Vector3A &v) = default;
+		constexpr Vector3A &operator=(Vector3A &&v) = default;
 
 		//---------------------------------------------------------------------
 		// Member Methods
 		//---------------------------------------------------------------------
+
+		bool HasNaNs() const noexcept {
+			return isnan(m_x) || isnan(m_y) || isnan(m_z);
+		}
 
 		constexpr T operator[](size_t i) const noexcept {
 			return (&m_x)[i];
@@ -319,6 +417,8 @@ namespace maml {
 		T m_z;
 	};
 
+#pragma warning( pop ) 
+
 	//-------------------------------------------------------------------------
 	// Type Declarations and Definitions: Vector3A
 	//-------------------------------------------------------------------------
@@ -335,8 +435,16 @@ namespace maml {
 	// Declarations and Definitions: Vector4A
 	//-------------------------------------------------------------------------
 
+#pragma warning( push )
+#pragma warning( disable : 4324)
+
+	template< typename T, typename Enable = void >
+	struct __declspec(align(16)) Vector4A;
+
 	template< typename T >
-	struct __declspec(align(16)) Vector4A : public AlignedData< Vector4A< T > > {
+	struct __declspec(align(16)) Vector4A< T, 
+		typename std::enable_if< std::is_pod< T >::value, void >::type> 
+		: public AlignedData< Vector4A< T > > {
 
 	public:
 
@@ -348,24 +456,46 @@ namespace maml {
 			: Vector4A(xyzw, xyzw, xyzw, xyzw) {}
 		constexpr explicit Vector4A(T x, T y, T z, T w) noexcept
 			: m_x(x), m_y(y), m_z(z), m_w(w) {}
+		constexpr explicit Vector4A(const Vector2< T >  &v, T z = 0, T w = 0) noexcept
+			: Vector4A(v.m_x, v.m_y, z, w) {}
 		constexpr explicit Vector4A(const Vector2A< T > &v, T z = 0, T w = 0) noexcept
-			: Vector3A(v.m_x, v.m_y, z, w) {}
-		constexpr explicit Vector4A(const Vector3A< T > &v, T w = 0)
-			: Vector3A(v.m_x, v.m_y, v.m_z, w) noexcept {}
-		constexpr Vector4A(const Vector4A< T > &v) noexcept = default;
-		constexpr Vector4A(Vector4A< T > &&v) noexcept = default;
+			: Vector4A(v.m_x, v.m_y, z, w) {}
+		constexpr explicit Vector4A(const Vector3< T >  &v, T w = 0) noexcept
+			: Vector4A(v.m_x, v.m_y, v.m_z, w) {}
+		constexpr explicit Vector4A(const Vector3A< T > &v, T w = 0) noexcept
+			: Vector4A(v.m_x, v.m_y, v.m_z, w) {}
+		constexpr Vector4A(const Vector4A &v) noexcept = default;
+		constexpr Vector4A(Vector4A &&v) noexcept = default;
+		template< typename U >
+		constexpr explicit Vector4A(const Vector4< U > &v) noexcept
+			: Vector4A(
+				static_cast< T >(v.m_x),
+				static_cast< T >(v.m_y),
+				static_cast< T >(v.m_z),
+				static_cast< T >(v.m_w)) {}
+		template< typename U >
+		constexpr explicit Vector4A(const Vector4A< U > &v) noexcept
+			: Vector4A(
+				static_cast< T >(v.m_x),
+				static_cast< T >(v.m_y),
+				static_cast< T >(v.m_z),
+				static_cast< T >(v.m_w)) {}
 		~Vector4A() = default;
 
 		//---------------------------------------------------------------------
 		// Assignment Operators
 		//---------------------------------------------------------------------
 
-		constexpr Vector4A &operator=(const Vector4A< T > &v) = default;
-		constexpr Vector4A &operator=(Vector4A< T > &&v) = default;
+		constexpr Vector4A &operator=(const Vector4A &v) = default;
+		constexpr Vector4A &operator=(Vector4A &&v) = default;
 
 		//---------------------------------------------------------------------
 		// Member Methods
 		//---------------------------------------------------------------------
+
+		bool HasNaNs() const noexcept {
+			return isnan(m_x) || isnan(m_y) || isnan(m_z) || is_nan(m_w);
+		}
 
 		constexpr T operator[](size_t i) const noexcept {
 			return (&m_x)[i];
@@ -384,6 +514,8 @@ namespace maml {
 		T m_w;
 	};
 
+#pragma warning( pop ) 
+
 	//-------------------------------------------------------------------------
 	// Type Declarations and Definitions: Vector4A
 	//-------------------------------------------------------------------------
@@ -395,10 +527,4 @@ namespace maml {
 	static_assert(sizeof(F32x4A) == 16);
 	static_assert(sizeof(S32x4A) == 16);
 	static_assert(sizeof(U32x4A) == 16);
-
-	//-------------------------------------------------------------------------
-	// Declarations and Definitions: Vector
-	//-------------------------------------------------------------------------
-
-	using VECTOR = __m128;
 }

@@ -22,19 +22,43 @@
     <Filter Include="Header Files\memory">
       <UniqueIdentifier>{5c42ed90-1e81-4e44-abeb-ffca6ab565ac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\complex">
+      <UniqueIdentifier>{2540e304-69c1-440e-b29d-97365eedb1e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\dual">
+      <UniqueIdentifier>{f927eba3-ab6e-4a8f-b71c-e103f3b9a22b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\hyperbolic">
+      <UniqueIdentifier>{2103f011-2ac5-4c94-9261-382987a643e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\vector">
+      <UniqueIdentifier>{77ffb6d7-ff5f-4236-9581-44474e29d9d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MAML\src\memory\types.hpp">
       <Filter>Header Files\memory</Filter>
-    </ClInclude>
-    <ClInclude Include="MAML\src\simd\vector.hpp">
-      <Filter>Header Files\simd</Filter>
     </ClInclude>
     <ClInclude Include="MAML\src\core\targetver.hpp">
       <Filter>Header Files\core</Filter>
     </ClInclude>
     <ClInclude Include="MAML\src\memory\allocation.hpp">
       <Filter>Header Files\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="MAML\src\complex\complex.hpp">
+      <Filter>Header Files\complex</Filter>
+    </ClInclude>
+    <ClInclude Include="MAML\src\vector\vector.hpp">
+      <Filter>Header Files\vector</Filter>
+    </ClInclude>
+    <ClInclude Include="MAML\src\dual\dual.hpp">
+      <Filter>Header Files\dual</Filter>
+    </ClInclude>
+    <ClInclude Include="MAML\src\hyperbolic\hyperbolic.hpp">
+      <Filter>Header Files\hyperbolic</Filter>
+    </ClInclude>
+    <ClInclude Include="MAML\src\simd\simd.hpp">
+      <Filter>Header Files\simd</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
