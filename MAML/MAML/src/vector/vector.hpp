@@ -199,8 +199,8 @@ namespace maml {
 			: m_x(x), m_y(y), m_z(z), m_w(w) {}
 		constexpr explicit Vector4(const Vector2< T > &v, T z = 0, T w = 0) noexcept
 			: Vector3(v.m_x, v.m_y, z, w) {}
-		constexpr explicit Vector4(const Vector3< T > &v, T w = 0)
-			: Vector3(v.m_x, v.m_y, v.m_z, w) noexcept {}
+		constexpr explicit Vector4(const Vector3< T > &v, T w = 0) noexcept
+			: Vector3(v.m_x, v.m_y, v.m_z, w) {}
 		constexpr Vector4(const Vector4 &v) noexcept = default;
 		constexpr Vector4(Vector4 &&v) noexcept = default;
 		template< typename U >
