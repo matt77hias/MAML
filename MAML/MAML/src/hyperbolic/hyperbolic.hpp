@@ -51,6 +51,9 @@ namespace maml {
 		// Member Methods
 		//---------------------------------------------------------------------
 
+		constexpr const Hyperbolic operator+() const noexcept {
+			return Hyperbolic(m_x, m_y);
+		}
 		constexpr const Hyperbolic operator-() const noexcept {
 			return Hyperbolic(-m_x, -m_y);
 		}
