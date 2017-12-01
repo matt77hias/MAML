@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------------
 #pragma region
 
-#include "vector\vector.hpp"
+#include "type\types.hpp"
 
 #pragma endregion
 
@@ -31,8 +31,8 @@ namespace maml {
 			: Dual(xy, xy) {}
 		constexpr Dual(T x, T y) noexcept
 			: Vector2(x, y) {}
-		constexpr Dual(const Dual< T > &v) noexcept = default;
-		constexpr Dual(Dual< T > &&v) noexcept = default;
+		constexpr Dual(const Dual &v) noexcept = default;
+		constexpr Dual(Dual &&v) noexcept = default;
 		template< typename U >
 		constexpr explicit Dual(const Dual< U > &v) noexcept
 			: Dual(
@@ -44,111 +44,114 @@ namespace maml {
 		// Assignment Operators
 		//---------------------------------------------------------------------
 
-		constexpr Dual< T > &operator=(const Dual< T > &v) = default;
-		constexpr Dual< T > &operator=(Dual< T > &&v) = default;
+		constexpr Dual &operator=(const Dual &v) = default;
+		constexpr Dual &operator=(Dual &&v) = default;
 
 		//---------------------------------------------------------------------
 		// Member Methods
 		//---------------------------------------------------------------------
 
-		constexpr const Dual< T > operator-() const noexcept {
-			return Dual< T >(-m_x, -m_y);
+		constexpr const Dual operator+() const noexcept {
+			return Dual(m_x, m_y);
+		}
+		constexpr const Dual operator-() const noexcept {
+			return Dual(-m_x, -m_y);
 		}
 		
-		constexpr const Dual< T > operator+(const Dual< T > &v) const noexcept {
-			return Dual< T >(m_x + v.m_x, m_y + v.m_y);
+		constexpr const Dual operator+(const Dual &v) const noexcept {
+			return Dual(m_x + v.m_x, m_y + v.m_y);
 		}
-		constexpr const Dual< T > operator-(const Dual< T > &v) const noexcept {
-			return Dual< T >(m_x - v.m_x, m_y - v.m_y);
+		constexpr const Dual operator-(const Dual &v) const noexcept {
+			return Dual(m_x - v.m_x, m_y - v.m_y);
 		}
-		constexpr const Dual< T > operator*(const Dual< T > &v) const noexcept {
-			return Dual< T >(
+		constexpr const Dual operator*(const Dual &v) const noexcept {
+			return Dual(
 				m_x * v.m_x, 
 				m_x * v.m_y + m_y * v.m_x);
 		}
-		constexpr const Dual< T > operator/(const Dual< T > &v) const noexcept {
+		constexpr const Dual operator/(const Dual &v) const noexcept {
 			const T inv = 1 / v.m_x;
-			return Dual< T >(
+			return Dual(
 				inv * m_x, 
 				inv * inv * (m_y * v.m_x - m_x * v.m_y));
 		}
 		
-		constexpr const Dual< T > operator+(T a) const noexcept {
-			return Dual< T >(m_x + a, m_y);
+		constexpr const Dual operator+(T a) const noexcept {
+			return Dual(m_x + a, m_y);
 		}
-		constexpr const Dual< T > operator-(T a) const noexcept {
-			return Dual< T >(m_x - a, m_y);
+		constexpr const Dual operator-(T a) const noexcept {
+			return Dual(m_x - a, m_y);
 		}
-		constexpr const Dual< T > operator*(T a) const noexcept {
-			return Dual< T >(m_x * a, m_y * a);
+		constexpr const Dual operator*(T a) const noexcept {
+			return Dual(m_x * a, m_y * a);
 		}
-		constexpr const Dual< T > operator/(T a) const noexcept {
+		constexpr const Dual operator/(T a) const noexcept {
 			const T inv = 1 / a;
-			return Dual< T >(m_x * inv, m_y * inv);
+			return Dual(m_x * inv, m_y * inv);
 		}
 
-		friend constexpr const Dual< T > operator+(T a, const Dual< T > &v) noexcept {
-			return Dual< T >(a + v.m_x, a + v.m_y);
+		friend constexpr const Dual operator+(T a, const Dual &v) noexcept {
+			return Dual(a + v.m_x, a + v.m_y);
 		}
-		friend constexpr const Dual< T > operator-(T a, const Dual< T > &v) noexcept {
-			return Dual< T >(a - v.m_x, a - v.m_y);
+		friend constexpr const Dual operator-(T a, const Dual &v) noexcept {
+			return Dual(a - v.m_x, a - v.m_y);
 		}
-		friend constexpr const Dual< T > operator*(T a, const Dual< T > &v) noexcept {
-			return Dual< T >(a * v.m_x, a * v.m_y);
+		friend constexpr const Dual operator*(T a, const Dual &v) noexcept {
+			return Dual(a * v.m_x, a * v.m_y);
 		}
-		friend constexpr const Dual< T > operator/(T a, const Dual< T > &v) noexcept {
+		friend constexpr const Dual operator/(T a, const Dual &v) noexcept {
 			const T inv = 1 / v.m_x;
-			return Dual< T >(
+			return Dual(
 				inv * a,
 				inv * inv * (-a * v.m_y));
 		}
 
-		constexpr Dual< T > &operator+=(const Dual< T > &v) noexcept {
+		constexpr Dual &operator+=(const Dual &v) noexcept {
 			m_x += v.m_x;
 			m_y += v.m_y;
 			return *this;
 		}
-		constexpr Dual< T > &operator-=(const Dual< T > &v) noexcept {
+		constexpr Dual &operator-=(const Dual &v) noexcept {
 			m_x -= v.m_x;
 			m_y -= v.m_y;
 			return *this;
 		}
-		constexpr Dual< T > &operator*=(const Dual< T > &v) noexcept {
+		constexpr Dual &operator*=(const Dual &v) noexcept {
 			m_x = m_x * v.m_x;
 			m_y = m_x * v.m_y + m_y * v.m_x;
 			return *this;
 		}
-		constexpr Dual< T > &operator/=(const Dual< T > &v) noexcept {
+		constexpr Dual &operator/=(const Dual &v) noexcept {
 			const T inv = 1 / v.m_x;
 			m_x *= inv;
 			m_y  = inv * inv * (m_y * v.m_x - m_x * v.m_y);
 			return *this;
 		}
 		
-		constexpr Dual< T > &operator+=(T a) noexcept {
+		constexpr Dual &operator+=(T a) noexcept {
 			m_x += a;
 			return *this;
 		}
-		constexpr Dual< T > &operator-=(T a) noexcept {
+		constexpr Dual &operator-=(T a) noexcept {
 			m_x -= a;
 			return *this;
 		}
-		constexpr Dual< T > &operator*=(T a) noexcept {
+		constexpr Dual &operator*=(T a) noexcept {
 			m_x *= a;
 			m_y *= a;
 			return *this;
 		}
-		constexpr Dual< T > &operator/=(T a) noexcept {
+		constexpr Dual &operator/=(T a) noexcept {
 			const T inv = 1 / a;
 			m_x *= inv;
 			m_y *= inv;
 			return *this;
 		}
 
-		constexpr bool operator==(const Dual< T > &v) const {
+		constexpr bool operator==(const Dual &v) const {
 			return m_x == v.m_x && m_y == v.m_y;
 		}
-		constexpr bool operator!=(const Dual< T > &v) const {
+		constexpr bool operator!=(const Dual &v) const {
 			return m_x != v.m_x || m_y != v.m_y;
 		}
 

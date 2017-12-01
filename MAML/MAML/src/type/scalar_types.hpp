@@ -6,8 +6,9 @@
 namespace maml {
 
 	//-------------------------------------------------------------------------
-	// Type Declarations and Definitions: Floating Point Values
+	// Floating Point Values
 	//-------------------------------------------------------------------------
+#pragma region
 
 	/**
 	 A 32-bit floating point value.
@@ -19,9 +20,15 @@ namespace maml {
 	 */
 	using F64 = double;
 
+	static_assert(4 == sizeof(F32));
+	static_assert(8 == sizeof(F64));
+
+#pragma endregion
+
 	//-------------------------------------------------------------------------
-	// Type Declarations and Definitions: Signed Integer Values
+	// Signed Integer Values
 	//-------------------------------------------------------------------------
+#pragma region
 
 	/**
 	 A signed 8-bit integer value.
@@ -43,9 +50,17 @@ namespace maml {
 	 */
 	using S64 = signed __int64;
 
+	static_assert(1 == sizeof(S8));
+	static_assert(2 == sizeof(S16));
+	static_assert(4 == sizeof(S32));
+	static_assert(8 == sizeof(S64));
+
+#pragma endregion
+
 	//-------------------------------------------------------------------------
-	// Type Declarations and Definitions: Unsigned Integer Values
+	// Unsigned Integer Values
 	//-------------------------------------------------------------------------
+#pragma region
 
 	/**
 	 An unsigned 8-bit integer value.
@@ -66,4 +81,11 @@ namespace maml {
 	 An unsigned 64-bit integer value.
 	 */
 	using U64 = unsigned __int64;
+
+	static_assert(1 == sizeof(U8));
+	static_assert(2 == sizeof(U16));
+	static_assert(4 == sizeof(U32));
+	static_assert(8 == sizeof(U64));
+
+#pragma endregion
 }

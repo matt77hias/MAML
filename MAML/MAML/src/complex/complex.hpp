@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------------
 #pragma region
 
-#include "vector\vector.hpp"
+#include "type\types.hpp"
 
 #pragma endregion
 
@@ -31,8 +31,8 @@ namespace maml {
 			: Complex(xy, xy) {}
 		constexpr Complex(T x, T y) noexcept
 			: Vector2(x, y) {}
-		constexpr Complex(const Complex< T > &v) noexcept = default;
-		constexpr Complex(Complex< T > &&v) noexcept = default;
+		constexpr Complex(const Complex &v) noexcept = default;
+		constexpr Complex(Complex &&v) noexcept = default;
 		template< typename U >
 		constexpr explicit Complex(const Complex< U > &v) noexcept
 			: Complex(
@@ -44,111 +44,114 @@ namespace maml {
 		// Assignment Operators
 		//---------------------------------------------------------------------
 
-		constexpr Complex< T > &operator=(const Complex< T > &v) = default;
-		constexpr Complex< T > &operator=(Complex< T > &&v) = default;
+		constexpr Complex &operator=(const Complex &v) = default;
+		constexpr Complex &operator=(Complex &&v) = default;
 
 		//---------------------------------------------------------------------
 		// Member Methods
 		//---------------------------------------------------------------------
 
-		constexpr const Complex< T > operator-() const noexcept {
-			return Complex< T >(-m_x, -m_y);
+		constexpr const Complex operator+() const noexcept {
+			return Complex(m_x, m_y);
+		}
+		constexpr const Complex operator-() const noexcept {
+			return Complex(-m_x, -m_y);
 		}
 		
-		constexpr const Complex< T > operator+(const Complex< T > &v) const noexcept {
-			return Complex< T >(m_x + v.m_x, m_y + v.m_y);
+		constexpr const Complex operator+(const Complex &v) const noexcept {
+			return Complex(m_x + v.m_x, m_y + v.m_y);
 		}
-		constexpr const Complex< T > operator-(const Complex< T > &v) const noexcept {
-			return Complex< T >(m_x - v.m_x, m_y - v.m_y);
+		constexpr const Complex operator-(const Complex &v) const noexcept {
+			return Complex(m_x - v.m_x, m_y - v.m_y);
 		}
-		constexpr const Complex< T > operator*(const Complex< T > &v) const noexcept {
-			return Complex< T >(
+		constexpr const Complex operator*(const Complex &v) const noexcept {
+			return Complex(
 				m_x * v.m_x - m_y * v.m_y, 
 				m_x * v.m_y + m_y * v.m_x);
 		}
-		constexpr const Complex< T > operator/(const Complex< T > &v) const noexcept {
+		constexpr const Complex operator/(const Complex &v) const noexcept {
 			const T inv = 1 / v.SqrAbs();
-			return Complex< T >(
+			return Complex(
 				inv * (m_x * v.m_x + m_y * v.m_y), 
 				inv * (m_y * v.m_x - m_x * v.m_y));
 		}
 		
-		constexpr const Complex< T > operator+(T a) const noexcept {
-			return Complex< T >(m_x + a, m_y);
+		constexpr const Complex operator+(T a) const noexcept {
+			return Complex(m_x + a, m_y);
 		}
-		constexpr const Complex< T > operator-(T a) const noexcept {
-			return Complex< T >(m_x - a, m_y);
+		constexpr const Complex operator-(T a) const noexcept {
+			return Complex(m_x - a, m_y);
 		}
-		constexpr const Complex< T > operator*(T a) const noexcept {
-			return Complex< T >(m_x * a, m_y * a);
+		constexpr const Complex operator*(T a) const noexcept {
+			return Complex(m_x * a, m_y * a);
 		}
-		constexpr const Complex< T > operator/(T a) const noexcept {
+		constexpr const Complex operator/(T a) const noexcept {
 			const T inv = 1 / a;
-			return Complex< T >(m_x * inv, m_y * inv);
+			return Complex(m_x * inv, m_y * inv);
 		}
 
-		friend constexpr const Complex< T > operator+(T a, const Complex< T > &v) noexcept {
-			return Complex< T >(a + v.m_x, a + v.m_y);
+		friend constexpr const Complex operator+(T a, const Complex &v) noexcept {
+			return Complex(a + v.m_x, a + v.m_y);
 		}
-		friend constexpr const Complex< T > operator-(T a, const Complex< T > &v) noexcept {
-			return Complex< T >(a - v.m_x, a - v.m_y);
+		friend constexpr const Complex operator-(T a, const Complex &v) noexcept {
+			return Complex(a - v.m_x, a - v.m_y);
 		}
-		friend constexpr const Complex< T > operator*(T a, const Complex< T > &v) noexcept {
-			return Complex< T >(a * v.m_x, a * v.m_y);
+		friend constexpr const Complex operator*(T a, const Complex &v) noexcept {
+			return Complex(a * v.m_x, a * v.m_y);
 		}
-		friend constexpr const Complex< T > operator/(T a, const Complex< T > &v) noexcept {
+		friend constexpr const Complex operator/(T a, const Complex &v) noexcept {
 			const T inv = 1 / v.SqrAbs();
-			return Complex< T >(
+			return Complex(
 				inv * ( a * v.m_x),
 				inv * (-a * v.m_y));
 		}
 
-		constexpr Complex< T > &operator+=(const Complex< T > &v) noexcept {
+		constexpr Complex &operator+=(const Complex &v) noexcept {
 			m_x += v.m_x;
 			m_y += v.m_y;
 			return *this;
 		}
-		constexpr Complex< T > &operator-=(const Complex< T > &v) noexcept {
+		constexpr Complex &operator-=(const Complex &v) noexcept {
 			m_x -= v.m_x;
 			m_y -= v.m_y;
 			return *this;
 		}
-		constexpr Complex< T > &operator*=(const Complex< T > &v) noexcept {
+		constexpr Complex &operator*=(const Complex &v) noexcept {
 			m_x = m_x * v.m_x - m_y * v.m_y;
 			m_y = m_x * v.m_y + m_y * v.m_x;
 			return *this;
 		}
-		constexpr Complex< T > &operator/=(const Complex< T > &v) noexcept {
+		constexpr Complex &operator/=(const Complex &v) noexcept {
 			const T inv = 1 / v.SqrAbs();
 			m_x = inv * (m_x * v.m_x + m_y * v.m_y);
 			m_y = inv * (m_y * v.m_x - m_x * v.m_y);
 			return *this;
 		}
 		
-		constexpr Complex< T > &operator+=(T a) noexcept {
+		constexpr Complex &operator+=(T a) noexcept {
 			m_x += a;
 			return *this;
 		}
-		constexpr Complex< T > &operator-=(T a) noexcept {
+		constexpr Complex &operator-=(T a) noexcept {
 			m_x -= a;
 			return *this;
 		}
-		constexpr Complex< T > &operator*=(T a) noexcept {
+		constexpr Complex &operator*=(T a) noexcept {
 			m_x *= a;
 			m_y *= a;
 			return *this;
 		}
-		constexpr Complex< T > &operator/=(T a) noexcept {
+		constexpr Complex &operator/=(T a) noexcept {
 			const T inv = 1 / a;
 			m_x *= inv;
 			m_y *= inv;
 			return *this;
 		}
 
-		constexpr bool operator==(const Complex< T > &v) const {
+		constexpr bool operator==(const Complex &v) const {
 			return m_x == v.m_x && m_y == v.m_y;
 		}
-		constexpr bool operator!=(const Complex< T > &v) const {
+		constexpr bool operator!=(const Complex &v) const {
 			return m_x != v.m_x || m_y != v.m_y;
 		}
 
@@ -159,8 +162,8 @@ namespace maml {
 			return m_y;
 		}
 	
-		constexpr const Complex< T > Conjugate() const noexcept {
-			return Complex< T >(m_x, -m_y);
+		constexpr const Complex Conjugate() const noexcept {
+			return Complex(m_x, -m_y);
 		}
 		
 		constexpr T Norm() const noexcept {
@@ -172,7 +175,7 @@ namespace maml {
 		T Abs() const noexcept {
 			return sqrt(SqrAbs());
 		}
-		Complex< T > &Normalize() noexcept {
+		Complex &Normalize() noexcept {
 			const T a = 1 / Abs();
 			m_x *= a;
 			m_y *= a;

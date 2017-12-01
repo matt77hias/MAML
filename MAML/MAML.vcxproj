@@ -23,10 +23,10 @@
     <ClInclude Include="MAML\src\core\targetver.hpp" />
     <ClInclude Include="MAML\src\dual\dual.hpp" />
     <ClInclude Include="MAML\src\hyperbolic\hyperbolic.hpp" />
-    <ClInclude Include="MAML\src\memory\allocation.hpp" />
-    <ClInclude Include="MAML\src\memory\types.hpp" />
     <ClInclude Include="MAML\src\simd\vector.hpp" />
-    <ClInclude Include="MAML\src\vector\vector.hpp" />
+    <ClInclude Include="MAML\src\type\scalar_types.hpp" />
+    <ClInclude Include="MAML\src\type\types.hpp" />
+    <ClInclude Include="MAML\src\type\vector_types.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{28DC5FAC-C856-43E1-828E-BEAA8A0E2CE4}</ProjectGuid>

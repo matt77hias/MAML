@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------------
 #pragma region
 
-#include "vector\vector.hpp"
+#include "type\types.hpp"
 
 #pragma endregion
 
@@ -31,8 +31,8 @@ namespace maml {
 			: Hyperbolic(xy, xy) {}
 		constexpr Hyperbolic(T x, T y) noexcept
 			: Vector2(x, y) {}
-		constexpr Hyperbolic(const Hyperbolic< T > &v) noexcept = default;
-		constexpr Hyperbolic(Hyperbolic< T > &&v) noexcept = default;
+		constexpr Hyperbolic(const Hyperbolic &v) noexcept = default;
+		constexpr Hyperbolic(Hyperbolic &&v) noexcept = default;
 		template< typename U >
 		constexpr explicit Hyperbolic(const Hyperbolic< U > &v) noexcept
 			: Hyperbolic(
@@ -44,93 +44,93 @@ namespace maml {
 		// Assignment Operators
 		//---------------------------------------------------------------------
 
-		constexpr Hyperbolic< T > &operator=(const Hyperbolic< T > &v) = default;
-		constexpr Hyperbolic< T > &operator=(Hyperbolic< T > &&v) = default;
+		constexpr Hyperbolic &operator=(const Hyperbolic &v) = default;
+		constexpr Hyperbolic &operator=(Hyperbolic &&v) = default;
 
 		//---------------------------------------------------------------------
 		// Member Methods
 		//---------------------------------------------------------------------
 
-		constexpr const Hyperbolic< T > operator-() const noexcept {
-			return Hyperbolic< T >(-m_x, -m_y);
+		constexpr const Hyperbolic operator-() const noexcept {
+			return Hyperbolic(-m_x, -m_y);
 		}
 
-		constexpr const Hyperbolic< T > operator+(const Hyperbolic< T > &v) const noexcept {
-			return Hyperbolic< T >(m_x + v.m_x, m_y + v.m_y);
+		constexpr const Hyperbolic operator+(const Hyperbolic &v) const noexcept {
+			return Hyperbolic(m_x + v.m_x, m_y + v.m_y);
 		}
-		constexpr const Hyperbolic< T > operator-(const Hyperbolic< T > &v) const noexcept {
-			return Hyperbolic< T >(m_x - v.m_x, m_y - v.m_y);
+		constexpr const Hyperbolic operator-(const Hyperbolic &v) const noexcept {
+			return Hyperbolic(m_x - v.m_x, m_y - v.m_y);
 		}
-		constexpr const Hyperbolic< T > operator*(const Hyperbolic< T > &v) const noexcept {
-			return Hyperbolic< T >(
+		constexpr const Hyperbolic operator*(const Hyperbolic &v) const noexcept {
+			return Hyperbolic(
 				m_x * v.m_x + m_y * v.m_y,
 				m_x * v.m_y + m_y * v.m_x);
 		}
 		
-		constexpr const Hyperbolic< T > operator+(T a) const noexcept {
-			return Hyperbolic< T >(m_x + a, m_y);
+		constexpr const Hyperbolic operator+(T a) const noexcept {
+			return Hyperbolic(m_x + a, m_y);
 		}
-		constexpr const Hyperbolic< T > operator-(T a) const noexcept {
-			return Hyperbolic< T >(m_x - a, m_y);
+		constexpr const Hyperbolic operator-(T a) const noexcept {
+			return Hyperbolic(m_x - a, m_y);
 		}
-		constexpr const Hyperbolic< T > operator*(T a) const noexcept {
-			return Hyperbolic< T >(m_x * a, m_y * a);
+		constexpr const Hyperbolic operator*(T a) const noexcept {
+			return Hyperbolic(m_x * a, m_y * a);
 		}
-		constexpr const Hyperbolic< T > operator/(T a) const noexcept {
+		constexpr const Hyperbolic operator/(T a) const noexcept {
 			const T inv = 1 / a;
-			return Hyperbolic< T >(m_x * inv, m_y * inv);
+			return Hyperbolic(m_x * inv, m_y * inv);
 		}
 
-		friend constexpr const Hyperbolic< T > operator+(T a, const Hyperbolic< T > &v) noexcept {
-			return Hyperbolic< T >(a + v.m_x, a + v.m_y);
+		friend constexpr const Hyperbolic operator+(T a, const Hyperbolic &v) noexcept {
+			return Hyperbolic(a + v.m_x, a + v.m_y);
 		}
-		friend constexpr const Hyperbolic< T > operator-(T a, const Hyperbolic< T > &v) noexcept {
-			return Hyperbolic< T >(a - v.m_x, a - v.m_y);
+		friend constexpr const Hyperbolic operator-(T a, const Hyperbolic &v) noexcept {
+			return Hyperbolic(a - v.m_x, a - v.m_y);
 		}
-		friend constexpr const Hyperbolic< T > operator*(T a, const Hyperbolic< T > &v) noexcept {
-			return Hyperbolic< T >(a * v.m_x, a * v.m_y);
+		friend constexpr const Hyperbolic operator*(T a, const Hyperbolic &v) noexcept {
+			return Hyperbolic(a * v.m_x, a * v.m_y);
 		}
 		
-		constexpr Hyperbolic< T > &operator+=(const Hyperbolic< T > &v) noexcept {
+		constexpr Hyperbolic &operator+=(const Hyperbolic &v) noexcept {
 			m_x += v.m_x;
 			m_y += v.m_y;
 			return *this;
 		}
-		constexpr Hyperbolic< T > &operator-=(const Hyperbolic< T > &v) noexcept {
+		constexpr Hyperbolic &operator-=(const Hyperbolic &v) noexcept {
 			m_x -= v.m_x;
 			m_y -= v.m_y;
 			return *this;
 		}
-		constexpr Hyperbolic< T > &operator*=(const Hyperbolic< T > &v) noexcept {
+		constexpr Hyperbolic &operator*=(const Hyperbolic &v) noexcept {
 			m_x = m_x * v.m_x + m_y * v.m_y;
 			m_y = m_x * v.m_y + m_y * v.m_x;
 			return *this;
 		}
 
-		constexpr Hyperbolic< T > &operator+=(T a) noexcept {
+		constexpr Hyperbolic &operator+=(T a) noexcept {
 			m_x += a;
 			return *this;
 		}
-		constexpr Hyperbolic< T > &operator-=(T a) noexcept {
+		constexpr Hyperbolic &operator-=(T a) noexcept {
 			m_x -= a;
 			return *this;
 		}
-		constexpr Hyperbolic< T > &operator*=(T a) noexcept {
+		constexpr Hyperbolic &operator*=(T a) noexcept {
 			m_x *= a;
 			m_y *= a;
 			return *this;
 		}
-		constexpr Hyperbolic< T > &operator/=(T a) noexcept {
+		constexpr Hyperbolic &operator/=(T a) noexcept {
 			const T inv = 1 / a;
 			m_x *= inv;
 			m_y *= inv;
 			return *this;
 		}
 
-		constexpr bool operator==(const Hyperbolic< T > &v) const {
+		constexpr bool operator==(const Hyperbolic &v) const {
 			return m_x == v.m_x && m_y == v.m_y;
 		}
-		constexpr bool operator!=(const Hyperbolic< T > &v) const {
+		constexpr bool operator!=(const Hyperbolic &v) const {
 			return m_x != v.m_x || m_y != v.m_y;
 		}
 
@@ -141,8 +141,8 @@ namespace maml {
 			return m_y;
 		}
 
-		constexpr const Hyperbolic< T > Conjugate() const noexcept {
-			return Hyperbolic< T >(m_x, -m_y);
+		constexpr const Hyperbolic Conjugate() const noexcept {
+			return Hyperbolic(m_x, -m_y);
 		}
 
 		constexpr T Modulus() const noexcept {

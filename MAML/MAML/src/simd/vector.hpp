@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------------
 #pragma region
 
-#include "vector\vector.hpp"
+#include "type\types.hpp"
 
 #pragma endregion
 
@@ -27,8 +27,7 @@ namespace maml {
 	// Declarations and Definitions: Vector
 	//-------------------------------------------------------------------------
 
-	__declspec(align(16)) struct SIMD32x4 final
-		: public AlignedData< SIMD32x4 > {
+	struct alignas(16) SIMD32x4 final {
 
 	public:
 
