@@ -1,4 +1,4 @@
-[![Build status][s1]][av] [![License][s2][li]
+[![Build status][s1]][av] [![License][s2][li]]
 
 [s1]: https://ci.appveyor.com/api/projects/status/8v9a0idnftj5s114?svg=true
 [s2]: https://img.shields.io/badge/license-GPL%203.0-blue.svg
