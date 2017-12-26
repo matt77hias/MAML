@@ -7,7 +7,7 @@
 [li]: https://raw.githubusercontent.com/matt77hias/MAML/master/LICENSE.txt
 
 # MAML - Matthias Advanced Math Library
-[![License][s1]][li]
+
 ## About
 
 ## Development
