@@ -8,7 +8,7 @@ namespace maml {
 	//-------------------------------------------------------------------------
 	// Floating Point Values
 	//-------------------------------------------------------------------------
-#pragma region
+	#pragma region
 
 	/**
 	 A 32-bit floating point value.
@@ -23,12 +23,12 @@ namespace maml {
 	static_assert(4 == sizeof(F32));
 	static_assert(8 == sizeof(F64));
 
-#pragma endregion
+	#pragma endregion
 
 	//-------------------------------------------------------------------------
 	// Signed Integer Values
 	//-------------------------------------------------------------------------
-#pragma region
+	#pragma region
 
 	/**
 	 A signed 8-bit integer value.
@@ -55,12 +55,12 @@ namespace maml {
 	static_assert(4 == sizeof(S32));
 	static_assert(8 == sizeof(S64));
 
-#pragma endregion
+	#pragma endregion
 
 	//-------------------------------------------------------------------------
 	// Unsigned Integer Values
 	//-------------------------------------------------------------------------
-#pragma region
+	#pragma region
 
 	/**
 	 An unsigned 8-bit integer value.
@@ -87,5 +87,5 @@ namespace maml {
 	static_assert(4 == sizeof(U32));
 	static_assert(8 == sizeof(U64));
 
-#pragma endregion
+	#pragma endregion
 }

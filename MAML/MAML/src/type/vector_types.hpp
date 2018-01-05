@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------------
 #pragma region
 
-// Primitive types.
+// Scalar types.
 #include "type\scalar_types.hpp"
 
 #pragma endregion
@@ -27,7 +27,7 @@ namespace maml {
 	//-------------------------------------------------------------------------
 	// Vector2
 	//-------------------------------------------------------------------------
-#pragma region
+	#pragma region
 
 	template< typename T, typename Enable = void >
 	struct Vector2;
@@ -52,16 +52,16 @@ namespace maml {
 		constexpr Vector2(Vector2 &&v) noexcept = default;
 		template< typename U >
 		constexpr explicit Vector2(const Vector2< U > &v) noexcept
-			: Vector2(static_cast< T >(v.m_x), 
-				      static_cast< T >(v.m_y)) {}
+			: Vector2(static_cast< T >(v.m_x),
+				static_cast< T >(v.m_y)) {}
 		~Vector2() = default;
 
 		//---------------------------------------------------------------------
 		// Assignment Operators
 		//---------------------------------------------------------------------
 
-		constexpr Vector2 &operator=(const Vector2 &v) = default;
-		constexpr Vector2 &operator=(Vector2 &&v) = default;
+		constexpr Vector2 &operator=(const Vector2 &v) noexcept = default;
+		constexpr Vector2 &operator=(Vector2 &&v) noexcept = default;
 
 		//---------------------------------------------------------------------
 		// Member Methods
@@ -89,18 +89,18 @@ namespace maml {
 		T m_y;
 	};
 
-#pragma endregion
+	#pragma endregion
 
 	//-------------------------------------------------------------------------
 	// Vector3
 	//-------------------------------------------------------------------------
-#pragma region
+	#pragma region
 
 	template< typename T, typename Enable = void >
 	struct Vector3;
 
 	template< typename T >
-	struct Vector3< T, 
+	struct Vector3< T,
 		typename std::enable_if_t< std::is_arithmetic_v< T >, void > > {
 
 	public:
@@ -122,16 +122,16 @@ namespace maml {
 		template< typename U >
 		constexpr explicit Vector3(const Vector3< U > &v) noexcept
 			: Vector3(static_cast< T >(v.m_x),
-				      static_cast< T >(v.m_y),
-				      static_cast< T >(v.m_z)) {}
+				static_cast< T >(v.m_y),
+				static_cast< T >(v.m_z)) {}
 		~Vector3() = default;
 
 		//---------------------------------------------------------------------
 		// Assignment Operators
 		//---------------------------------------------------------------------
 
-		constexpr Vector3 &operator=(const Vector3 &v) = default;
-		constexpr Vector3 &operator=(Vector3 &&v) = default;
+		constexpr Vector3 &operator=(const Vector3 &v) noexcept = default;
+		constexpr Vector3 &operator=(Vector3 &&v) noexcept = default;
 
 		//---------------------------------------------------------------------
 		// Member Methods
@@ -160,18 +160,18 @@ namespace maml {
 		T m_z;
 	};
 
-#pragma endregion
+	#pragma endregion
 
 	//-------------------------------------------------------------------------
 	// Vector4
 	//-------------------------------------------------------------------------
-#pragma region
+	#pragma region
 
 	template< typename T, typename Enable = void >
 	struct Vector4;
 
 	template< typename T >
-	struct Vector4< T, 
+	struct Vector4< T,
 		typename std::enable_if_t< std::is_arithmetic_v< T >, void > > {
 
 	public:
@@ -195,17 +195,17 @@ namespace maml {
 		template< typename U >
 		constexpr explicit Vector4(const Vector4< U > &v) noexcept
 			: Vector4(static_cast< T >(v.m_x),
-				      static_cast< T >(v.m_y),
-				      static_cast< T >(v.m_z),
-				      static_cast< T >(v.m_w)) {}
+				static_cast< T >(v.m_y),
+				static_cast< T >(v.m_z),
+				static_cast< T >(v.m_w)) {}
 		~Vector4() = default;
 
 		//---------------------------------------------------------------------
 		// Assignment Operators
 		//---------------------------------------------------------------------
 
-		constexpr Vector4 &operator=(const Vector4 &v) = default;
-		constexpr Vector4 &operator=(Vector4 &&v) = default;
+		constexpr Vector4 &operator=(const Vector4 &v) noexcept = default;
+		constexpr Vector4 &operator=(Vector4 &&v) noexcept = default;
 
 		//---------------------------------------------------------------------
 		// Member Methods
@@ -235,21 +235,21 @@ namespace maml {
 		T m_w;
 	};
 
-#pragma endregion
+	#pragma endregion
 
 	//-------------------------------------------------------------------------
 	// Vector2A
 	//-------------------------------------------------------------------------
-#pragma region
+	#pragma region
 
-#pragma warning( push )
-#pragma warning( disable : 4324)
+	#pragma warning( push )
+	#pragma warning( disable : 4324)
 
 	template< typename T, typename Enable = void >
 	struct alignas(16) Vector2A;
 
 	template< typename T >
-	struct alignas(16) Vector2A< T, 
+	struct alignas(16) Vector2A< T,
 		typename std::enable_if_t< std::is_arithmetic_v< T >, void > > {
 
 	public:
@@ -269,19 +269,19 @@ namespace maml {
 		template< typename U >
 		constexpr explicit Vector2A(const Vector2< U > &v) noexcept
 			: Vector2A(static_cast< T >(v.m_x),
-				       static_cast< T >(v.m_y)) {}
+				static_cast< T >(v.m_y)) {}
 		template< typename U >
 		constexpr explicit Vector2A(const Vector2A< U > &v) noexcept
 			: Vector2A(static_cast< T >(v.m_x),
-				       static_cast< T >(v.m_y)) {}
+				static_cast< T >(v.m_y)) {}
 		~Vector2A() = default;
 
 		//---------------------------------------------------------------------
 		// Assignment Operators
 		//---------------------------------------------------------------------
 
-		constexpr Vector2A &operator=(const Vector2A &v) = default;
-		constexpr Vector2A &operator=(Vector2A &&v) = default;
+		constexpr Vector2A &operator=(const Vector2A &v) noexcept = default;
+		constexpr Vector2A &operator=(Vector2A &&v) noexcept = default;
 
 		//---------------------------------------------------------------------
 		// Member Methods
@@ -309,17 +309,17 @@ namespace maml {
 		T m_y;
 	};
 
-#pragma warning( pop )
+	#pragma warning( pop )
 
-#pragma endregion
+	#pragma endregion
 
 	//-------------------------------------------------------------------------
 	// Vector3A
 	//-------------------------------------------------------------------------
-#pragma region
+	#pragma region
 
-#pragma warning( push )
-#pragma warning( disable : 4324)
+	#pragma warning( push )
+	#pragma warning( disable : 4324)
 
 	template< typename T, typename Enable = void >
 	struct alignas(16) Vector3A;
@@ -347,21 +347,21 @@ namespace maml {
 		template< typename U >
 		constexpr explicit Vector3A(const Vector3< U > &v) noexcept
 			: Vector3A(static_cast< T >(v.m_x),
-				       static_cast< T >(v.m_y),
-				       static_cast< T >(v.m_z)) {}
+				static_cast< T >(v.m_y),
+				static_cast< T >(v.m_z)) {}
 		template< typename U >
 		constexpr explicit Vector3A(const Vector3A< U > &v) noexcept
 			: Vector3A(static_cast< T >(v.m_x),
-				       static_cast< T >(v.m_y),
-				       static_cast< T >(v.m_z)) {}
+				static_cast< T >(v.m_y),
+				static_cast< T >(v.m_z)) {}
 		~Vector3A() = default;
 
 		//---------------------------------------------------------------------
 		// Assignment Operators
 		//---------------------------------------------------------------------
 
-		constexpr Vector3A &operator=(const Vector3A &v) = default;
-		constexpr Vector3A &operator=(Vector3A &&v) = default;
+		constexpr Vector3A &operator=(const Vector3A &v) noexcept = default;
+		constexpr Vector3A &operator=(Vector3A &&v) noexcept = default;
 
 		//---------------------------------------------------------------------
 		// Member Methods
@@ -390,23 +390,23 @@ namespace maml {
 		T m_z;
 	};
 
-#pragma warning( pop )
+	#pragma warning( pop )
 
-#pragma endregion
+	#pragma endregion
 
 	//-------------------------------------------------------------------------
 	// Vector4A
 	//-------------------------------------------------------------------------
-#pragma region
+	#pragma region
 
-#pragma warning( push )
-#pragma warning( disable : 4324)
+	#pragma warning( push )
+	#pragma warning( disable : 4324)
 
 	template< typename T, typename Enable = void >
 	struct __declspec(align(16)) Vector4A;
 
 	template< typename T >
-	struct __declspec(align(16)) Vector4A< T, 
+	struct __declspec(align(16)) Vector4A< T,
 		typename std::enable_if_t< std::is_arithmetic_v< T >, void > > {
 
 	public:
@@ -430,23 +430,23 @@ namespace maml {
 		template< typename U >
 		constexpr explicit Vector4A(const Vector4< U > &v) noexcept
 			: Vector4A(static_cast< T >(v.m_x),
-				       static_cast< T >(v.m_y),
-				       static_cast< T >(v.m_z),
-				       static_cast< T >(v.m_w)) {}
+				static_cast< T >(v.m_y),
+				static_cast< T >(v.m_z),
+				static_cast< T >(v.m_w)) {}
 		template< typename U >
 		constexpr explicit Vector4A(const Vector4A< U > &v) noexcept
 			: Vector4A(static_cast< T >(v.m_x),
-				       static_cast< T >(v.m_y),
-				       static_cast< T >(v.m_z),
-				       static_cast< T >(v.m_w)) {}
+				static_cast< T >(v.m_y),
+				static_cast< T >(v.m_z),
+				static_cast< T >(v.m_w)) {}
 		~Vector4A() = default;
 
 		//---------------------------------------------------------------------
 		// Assignment Operators
 		//---------------------------------------------------------------------
 
-		constexpr Vector4A &operator=(const Vector4A &v) = default;
-		constexpr Vector4A &operator=(Vector4A &&v) = default;
+		constexpr Vector4A &operator=(const Vector4A &v) noexcept = default;
+		constexpr Vector4A &operator=(Vector4A &&v) noexcept = default;
 
 		//---------------------------------------------------------------------
 		// Member Methods
@@ -476,14 +476,14 @@ namespace maml {
 		T m_w;
 	};
 
-#pragma warning( pop )
+	#pragma warning( pop )
 
-#pragma endregion
+	#pragma endregion
 
 	//-------------------------------------------------------------------------
 	// Floating Point Vectors
 	//-------------------------------------------------------------------------
-#pragma region
+	#pragma region
 
 	/**
 	 A 2x1 32-bit floating point vector.
@@ -542,12 +542,12 @@ namespace maml {
 	static_assert(16 == sizeof(F32x3A));
 	static_assert(16 == sizeof(F32x4A));
 
-#pragma endregion
+	#pragma endregion
 
 	//-------------------------------------------------------------------------
 	// Signed Integer Vectors
 	//-------------------------------------------------------------------------
-#pragma region
+	#pragma region
 
 	/**
 	 A 2x1 signed 32-bit integer vector.
@@ -568,12 +568,12 @@ namespace maml {
 	static_assert(12 == sizeof(S32x3));
 	static_assert(16 == sizeof(S32x4));
 
-#pragma endregion
+	#pragma endregion
 
 	//-------------------------------------------------------------------------
 	// Unsigned Integer Vectors
 	//-------------------------------------------------------------------------
-#pragma region
+	#pragma region
 
 	/**
 	 An 2x1 unsigned 32-bit integer vector.
@@ -594,5 +594,5 @@ namespace maml {
 	static_assert(12 == sizeof(U32x3));
 	static_assert(16 == sizeof(U32x4));
 
-#pragma endregion
+	#pragma endregion
 }

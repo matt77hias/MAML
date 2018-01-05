@@ -35,9 +35,8 @@ namespace maml {
 		constexpr Hyperbolic(Hyperbolic &&v) noexcept = default;
 		template< typename U >
 		constexpr explicit Hyperbolic(const Hyperbolic< U > &v) noexcept
-			: Hyperbolic(
-				static_cast< T >(v.m_x),
-				static_cast< T >(v.m_y)) {}
+			: Hyperbolic(static_cast< T >(v.m_x),
+				         static_cast< T >(v.m_y)) {}
 		~Hyperbolic() = default;
 
 		//---------------------------------------------------------------------
@@ -51,6 +50,9 @@ namespace maml {
 		// Member Methods
 		//---------------------------------------------------------------------
 
+		constexpr const Hyperbolic operator+() const noexcept {
+			return Hyperbolic(m_x, m_y);
+		}
 		constexpr const Hyperbolic operator-() const noexcept {
 			return Hyperbolic(-m_x, -m_y);
 		}
@@ -62,11 +64,10 @@ namespace maml {
 			return Hyperbolic(m_x - v.m_x, m_y - v.m_y);
 		}
 		constexpr const Hyperbolic operator*(const Hyperbolic &v) const noexcept {
-			return Hyperbolic(
-				m_x * v.m_x + m_y * v.m_y,
-				m_x * v.m_y + m_y * v.m_x);
+			return Hyperbolic(m_x * v.m_x + m_y * v.m_y,
+				              m_x * v.m_y + m_y * v.m_x);
 		}
-		
+
 		constexpr const Hyperbolic operator+(T a) const noexcept {
 			return Hyperbolic(m_x + a, m_y);
 		}
@@ -90,7 +91,7 @@ namespace maml {
 		friend constexpr const Hyperbolic operator*(T a, const Hyperbolic &v) noexcept {
 			return Hyperbolic(a * v.m_x, a * v.m_y);
 		}
-		
+
 		constexpr Hyperbolic &operator+=(const Hyperbolic &v) noexcept {
 			m_x += v.m_x;
 			m_y += v.m_y;

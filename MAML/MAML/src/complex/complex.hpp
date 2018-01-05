@@ -35,9 +35,8 @@ namespace maml {
 		constexpr Complex(Complex &&v) noexcept = default;
 		template< typename U >
 		constexpr explicit Complex(const Complex< U > &v) noexcept
-			: Complex(
-				static_cast< T >(v.m_x),
-				static_cast< T >(v.m_y)) {}
+			: Complex(static_cast< T >(v.m_x),
+				      static_cast< T >(v.m_y)) {}
 		~Complex() = default;
 
 		//---------------------------------------------------------------------
@@ -65,15 +64,13 @@ namespace maml {
 			return Complex(m_x - v.m_x, m_y - v.m_y);
 		}
 		constexpr const Complex operator*(const Complex &v) const noexcept {
-			return Complex(
-				m_x * v.m_x - m_y * v.m_y, 
-				m_x * v.m_y + m_y * v.m_x);
+			return Complex(m_x * v.m_x - m_y * v.m_y, 
+				           m_x * v.m_y + m_y * v.m_x);
 		}
 		constexpr const Complex operator/(const Complex &v) const noexcept {
 			const T inv = 1 / v.SqrAbs();
-			return Complex(
-				inv * (m_x * v.m_x + m_y * v.m_y), 
-				inv * (m_y * v.m_x - m_x * v.m_y));
+			return Complex(inv * (m_x * v.m_x + m_y * v.m_y), 
+				           inv * (m_y * v.m_x - m_x * v.m_y));
 		}
 		
 		constexpr const Complex operator+(T a) const noexcept {
@@ -101,9 +98,8 @@ namespace maml {
 		}
 		friend constexpr const Complex operator/(T a, const Complex &v) noexcept {
 			const T inv = 1 / v.SqrAbs();
-			return Complex(
-				inv * ( a * v.m_x),
-				inv * (-a * v.m_y));
+			return Complex(inv * ( a * v.m_x),
+				           inv * (-a * v.m_y));
 		}
 
 		constexpr Complex &operator+=(const Complex &v) noexcept {

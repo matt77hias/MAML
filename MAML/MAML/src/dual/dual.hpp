@@ -35,9 +35,8 @@ namespace maml {
 		constexpr Dual(Dual &&v) noexcept = default;
 		template< typename U >
 		constexpr explicit Dual(const Dual< U > &v) noexcept
-			: Dual(
-				static_cast< T >(v.m_x),
-				static_cast< T >(v.m_y)) {}
+			: Dual(static_cast< T >(v.m_x),
+				   static_cast< T >(v.m_y)) {}
 		~Dual() = default;
 
 		//---------------------------------------------------------------------
@@ -65,15 +64,13 @@ namespace maml {
 			return Dual(m_x - v.m_x, m_y - v.m_y);
 		}
 		constexpr const Dual operator*(const Dual &v) const noexcept {
-			return Dual(
-				m_x * v.m_x, 
-				m_x * v.m_y + m_y * v.m_x);
+			return Dual(m_x * v.m_x, 
+				        m_x * v.m_y + m_y * v.m_x);
 		}
 		constexpr const Dual operator/(const Dual &v) const noexcept {
 			const T inv = 1 / v.m_x;
-			return Dual(
-				inv * m_x, 
-				inv * inv * (m_y * v.m_x - m_x * v.m_y));
+			return Dual(inv * m_x, 
+				        inv * inv * (m_y * v.m_x - m_x * v.m_y));
 		}
 		
 		constexpr const Dual operator+(T a) const noexcept {
@@ -101,9 +98,8 @@ namespace maml {
 		}
 		friend constexpr const Dual operator/(T a, const Dual &v) noexcept {
 			const T inv = 1 / v.m_x;
-			return Dual(
-				inv * a,
-				inv * inv * (-a * v.m_y));
+			return Dual(inv * a,
+				        inv * inv * (-a * v.m_y));
 		}
 
 		constexpr Dual &operator+=(const Dual &v) noexcept {
