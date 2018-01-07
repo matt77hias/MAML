@@ -403,10 +403,10 @@ namespace maml {
 	#pragma warning( disable : 4324)
 
 	template< typename T, typename Enable = void >
-	struct __declspec(align(16)) Vector4A;
+	struct alignas(16) Vector4A;
 
 	template< typename T >
-	struct __declspec(align(16)) Vector4A< T,
+	struct alignas(16) Vector4A< T,
 		typename std::enable_if_t< std::is_arithmetic_v< T >, void > > {
 
 	public:
