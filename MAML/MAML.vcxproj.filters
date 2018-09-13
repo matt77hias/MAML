@@ -7,46 +7,27 @@
     </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd;tpp</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Header Files\core">
-      <UniqueIdentifier>{61f46649-6cfc-41be-a48e-bc1ca9eacdec}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;tpp;hxx;hm;inl;inc;xsd;tpp</Extensions>
     </Filter>
     <Filter Include="Header Files\simd">
       <UniqueIdentifier>{684619a6-88dd-4895-9f2d-f2bcb9eb5eb4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\complex">
-      <UniqueIdentifier>{2540e304-69c1-440e-b29d-97365eedb1e1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\dual">
-      <UniqueIdentifier>{f927eba3-ab6e-4a8f-b71c-e103f3b9a22b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\hyperbolic">
-      <UniqueIdentifier>{2103f011-2ac5-4c94-9261-382987a643e2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\type">
       <UniqueIdentifier>{4254c10a-b5cf-4a27-8c01-7abcf82be61a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\collection">
+      <UniqueIdentifier>{2b35198e-1f8d-46a4-a300-f9c7e9659b75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\algebra">
+      <UniqueIdentifier>{0d5e386f-4169-4aad-b05b-b8383bb212a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MAML\src\core\targetver.hpp">
-      <Filter>Header Files\core</Filter>
-    </ClInclude>
-    <ClInclude Include="MAML\src\complex\complex.hpp">
-      <Filter>Header Files\complex</Filter>
-    </ClInclude>
-    <ClInclude Include="MAML\src\dual\dual.hpp">
-      <Filter>Header Files\dual</Filter>
-    </ClInclude>
-    <ClInclude Include="MAML\src\hyperbolic\hyperbolic.hpp">
-      <Filter>Header Files\hyperbolic</Filter>
-    </ClInclude>
     <ClInclude Include="MAML\src\simd\vector.hpp">
       <Filter>Header Files\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="MAML\src\type\scalar_types.hpp">
+      <Filter>Header Files\type</Filter>
     </ClInclude>
     <ClInclude Include="MAML\src\type\types.hpp">
       <Filter>Header Files\type</Filter>
@@ -54,8 +35,20 @@
     <ClInclude Include="MAML\src\type\vector_types.hpp">
       <Filter>Header Files\type</Filter>
     </ClInclude>
-    <ClInclude Include="MAML\src\type\scalar_types.hpp">
+    <ClInclude Include="MAML\src\type\atomic_types.hpp">
       <Filter>Header Files\type</Filter>
+    </ClInclude>
+    <ClInclude Include="MAML\src\collection\array.hpp">
+      <Filter>Header Files\collection</Filter>
+    </ClInclude>
+    <ClInclude Include="MAML\src\algebra\complex.hpp">
+      <Filter>Header Files\algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="MAML\src\algebra\dual.hpp">
+      <Filter>Header Files\algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="MAML\src\algebra\hyperbolic.hpp">
+      <Filter>Header Files\algebra</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

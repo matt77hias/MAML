@@ -18,3 +18,10 @@
 *.c			text eol=crlf
 *.cc		text eol=crlf
 *.cpp		text eol=crlf
+
+# Visual Studio
+*.filters	text eol=crlf
+*.props		text eol=crlf
+*.sln		text eol=crlf
+*.users		text eol=crlf
+*.vcxproj	text eol=crlf

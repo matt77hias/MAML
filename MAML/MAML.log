@@ -1,0 +1,17 @@
+﻿Build started 13/09/2018 21:26:20.
+     1>Project "D:\Users\Matthias\Documents\Visual Studio 2017\Projects\MAML\MAML\MAML.vcxproj" on node 2 (Build target(s)).
+     1>PrepareForBuild:
+         Creating directory "MAML\bin\x64\Debug\".
+         Creating directory "MAML\tmp\x64\Debug\MAML.tlog\".
+       InitializeBuildStatus:
+         Creating "MAML\tmp\x64\Debug\MAML.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+       FinalizeBuildStatus:
+         Deleting file "MAML\tmp\x64\Debug\MAML.tlog\unsuccessfulbuild".
+         Touching "MAML\tmp\x64\Debug\MAML.tlog\MAML.lastbuildstate".
+     1>Done Building Project "D:\Users\Matthias\Documents\Visual Studio 2017\Projects\MAML\MAML\MAML.vcxproj" (Build target(s)).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.13
