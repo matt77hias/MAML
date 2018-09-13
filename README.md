@@ -19,9 +19,9 @@
 ## Features
 
 * Algebras:
-  * Complex Numbers
-  * Dual Numbers
-  * Hyperbolic Numbers
+  * Complex
+  * Dual
+  * Hyperbolic
 * Compile-time math (*work in progress*)
 * SIMD (*work in progress*)
 
