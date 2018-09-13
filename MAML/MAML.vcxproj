@@ -23,6 +23,7 @@
     <ClInclude Include="MAML\src\algebra\dual.hpp" />
     <ClInclude Include="MAML\src\algebra\hyperbolic.hpp" />
     <ClInclude Include="MAML\src\collection\array.hpp" />
+    <ClInclude Include="MAML\src\constexpr\math.hpp" />
     <ClInclude Include="MAML\src\simd\vector.hpp" />
     <ClInclude Include="MAML\src\type\atomic_types.hpp" />
     <ClInclude Include="MAML\src\type\scalar_types.hpp" />

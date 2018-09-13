@@ -21,6 +21,9 @@
     <Filter Include="Header Files\algebra">
       <UniqueIdentifier>{0d5e386f-4169-4aad-b05b-b8383bb212a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\constexpr">
+      <UniqueIdentifier>{59a9f1e0-33c0-4cf7-ad6d-0c7efc09d152}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MAML\src\simd\vector.hpp">
@@ -49,6 +52,9 @@
     </ClInclude>
     <ClInclude Include="MAML\src\algebra\hyperbolic.hpp">
       <Filter>Header Files\algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="MAML\src\constexpr\math.hpp">
+      <Filter>Header Files\constexpr</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
