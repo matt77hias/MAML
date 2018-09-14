@@ -3,141 +3,94 @@
 //-----------------------------------------------------------------------------
 // Includes
 //-----------------------------------------------------------------------------
+#pragma region
 
 #include <cstddef>
+#include <limits>
 #include <type_traits>
 
+#pragma endregion
+
 //-----------------------------------------------------------------------------
-// Factorial
+// Declarations and Definitions
 //-----------------------------------------------------------------------------
-namespace cm::details {
-
-	template< typename T, 
-              typename = std::enable_if_t< std::is_unsigned_v< T > > >
-    struct Factorial {
-
-        constexpr T operator()(T x) const noexcept {
-            T result(1);
-            for (T i = 2u; i <= x; ++i) {
-                result *= i;
-            }
-            return result;
-        }
-    };
-}
-
-namespace cm {
+namespace maml {
 
 	template< typename T >
-	constexpr T factorial(T x) noexcept {
-		return details::Factorial< T >()(x);
+	constexpr T abs(T x) noexcept {
+		static_assert(!std::is_unsigned_v< T >);
+		return (0 <= x) ? x : -x;
 	}
-}
 
-//-----------------------------------------------------------------------------
-// Power
-//-----------------------------------------------------------------------------  
-namespace cm::details {
-
-	template< typename T, typename E,
-              typename = std::enable_if_t< std::is_unsigned_v< E > > >
-    struct Power {
-    
-        constexpr T operator()(T x, E e) const noexcept {
-            T result(1);
-            for (std::size_t i = 0u; i < e; ++i) {
-                result *= x;
-            }
-            return result;
-        }
-    };
-}
-
-namespace cm {
-
-	template< typename T, typename E >
-	constexpr T power(T x, E e) noexcept {
-		return details::Power< T, E >()(x, e);
+	template< typename T >
+	constexpr bool equal(T x, T y) noexcept {
+		static_assert(std::is_floating_point_v< T >);
+		return std::numeric_limits< T >::epsilon() >= abs(x - y);
 	}
-}
 
-//-----------------------------------------------------------------------------
-// Exponential Function
-//-----------------------------------------------------------------------------
-namespace cm::details {
+	template< typename T >
+	constexpr T exp(T x, std::size_t n = 20u) noexcept {
+		static_assert(std::is_floating_point_v< T >);
 
-	template< typename T, std::size_t N,
-		      typename = std::enable_if_t< std::is_floating_point_v< T > > >
-	struct Exponential {
+		//          inf x^n
+		// exp(x) = sum ---
+		//          i=0  n!
 
-		constexpr T operator()(T x) const noexcept {
-			T result(0);
-			for (std::size_t i = 0u; i < N; ++i) {
-				result += power(x, i) / factorial(i);
-			}
-			return result;
+		T sum_old(-1);
+		T sum(0);
+		T ci(1);
+		for (std::size_t i = 0u; i < n && !equal(sum_old, sum); ++i) {
+			sum_old = sum;
+			sum += ci;
+			ci *= x / (i + 1);
 		}
-	};
-}
 
-namespace cm {
-
-	template< typename T, std::size_t N = 10 >
-	constexpr T exp(T x) noexcept {
-		return details::Exponential< T, N >()(x);
+		return sum;
 	}
-}
 
-//-----------------------------------------------------------------------------
-// Sine
-//-----------------------------------------------------------------------------
-namespace cm::details {
+	template< typename T >
+	constexpr T cos(T x, std::size_t n = 20u) noexcept {
+		static_assert(std::is_floating_point_v< T >);
 
-	template< typename T, std::size_t N, 
-              typename = std::enable_if_t< std::is_floating_point_v< T > > >
-    struct Sine {
-        
-        constexpr T operator()(T x) const noexcept {
-            T result(0);
-            for (std::size_t i = 0u; i < N; ++i) {
-                result += power(-1, i) * power(x, 2u * i + 1u) / factorial(2u * i + 1u);        
-            }
-            return result;
-        }
-    };
-}
+		//          inf  (-1)^i            inf
+		// cos(x) = sum -------- x^(2*i) = sum ci
+		//          i=0  (2*i)!            i=0
+		
+		const T x2 = x * x;
 
-namespace cm {
-
-	template< typename T, std::size_t N = 10 >
-	constexpr T sin(T x) noexcept {
-		return details::Sine< T, N >()(x);
-	}
-}
-    
-//-----------------------------------------------------------------------------
-// Cosine
-//-----------------------------------------------------------------------------
-namespace cm::details {
-
-	template< typename T, std::size_t N,
-		      typename = std::enable_if_t< std::is_floating_point_v< T > > >
-		struct Cosine {
-
-		constexpr T operator()(T x) const noexcept {
-			T result(0);
-			for (std::size_t i = 0u; i < N; ++i) {
-				result += power(-1, i) * power(x, 2u * i) / factorial(2u * i);
-			}
-			return result;
+		T sum_old(-1);
+		T sum(0);
+		T ci(1);
+		for (std::size_t i = 0u; i < n && !equal(sum_old, sum); ++i) {
+			sum_old = sum;
+			sum += ci;
+			ci *= -x2;
+			ci /= ((2 * i + 1) * (2 * i + 2));
 		}
-	};
-}
+		
+		return sum;
+	}
 
-namespace cm {
+	template< typename T >
+	constexpr T sin(T x, std::size_t n = 20u) noexcept {
+		static_assert(std::is_floating_point_v< T >);
 
-	template< typename T, std::size_t N = 10 >
-	constexpr T cos(T x) noexcept {
-		return details::Cosine< T, N >()(x);
+		//          inf  (-1)^i              inf
+		// sin(x) = sum -------- x^(2*i+1) = sum ci
+		//          i=0 (2*i+1)!             i=0
+		
+		const T x2 = x * x;
+
+		T sum_old(-1);
+		T sum(0);
+		T ci(x);
+		for (std::size_t i = 0u; i < n && !equal(sum_old, sum); ++i) {
+			sum_old = sum;
+			sum += ci;
+			ci *= -x2;
+			ci /= ((2 * i + 2) * (2 * i + 3));
+		}
+		
+		return sum;
 	}
 }
