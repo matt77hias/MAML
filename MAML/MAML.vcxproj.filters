@@ -57,4 +57,9 @@
       <Filter>Header Files\constexpr</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="MAML\src\constexpr\math.tpp">
+      <Filter>Header Files\constexpr</Filter>
+    </None>
+  </ItemGroup>
 </Project>

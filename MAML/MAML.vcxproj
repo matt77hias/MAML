@@ -30,6 +30,9 @@
     <ClInclude Include="MAML\src\type\types.hpp" />
     <ClInclude Include="MAML\src\type\vector_types.hpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="MAML\src\constexpr\math.tpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{28DC5FAC-C856-43E1-828E-BEAA8A0E2CE4}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
