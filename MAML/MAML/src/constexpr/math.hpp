@@ -17,25 +17,28 @@
 namespace maml {
 
 	template< typename T >
-	constexpr T abs(T x) noexcept;
+	constexpr T Abs(T x) noexcept;
 
 	template< typename T >
-	constexpr bool equal(T x, T y) noexcept;
+	constexpr bool Equal(T x, T y) noexcept;
 
 	template< typename T >
-	constexpr T exp(T x, std::size_t n = 20u) noexcept;
+	constexpr T Sqr(T x) noexcept;
 
 	template< typename T >
-	constexpr T cos(T x, std::size_t n = 20u) noexcept;
+	constexpr T Exp(T x, std::size_t n = 20u) noexcept;
 
 	template< typename T >
-	constexpr T sin(T x, std::size_t n = 20u) noexcept;
+	constexpr T Cos(T x, std::size_t n = 20u) noexcept;
 
 	template< typename T >
-	constexpr T cosh(T x, std::size_t n = 20u) noexcept;
+	constexpr T Sin(T x, std::size_t n = 20u) noexcept;
 
 	template< typename T >
-	constexpr T sinh(T x, std::size_t n = 20u) noexcept;
+	constexpr T Cosh(T x, std::size_t n = 20u) noexcept;
+
+	template< typename T >
+	constexpr T Sinh(T x, std::size_t n = 20u) noexcept;
 }
 
 //-----------------------------------------------------------------------------

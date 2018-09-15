@@ -17,19 +17,24 @@
 namespace maml {
 
 	template< typename T >
-	constexpr T abs(T x) noexcept {
+	constexpr T Abs(T x) noexcept {
 		static_assert(!std::is_unsigned_v< T >);
 		return (0 <= x) ? x : -x;
 	}
 
 	template< typename T >
-	constexpr bool equal(T x, T y) noexcept {
+	constexpr bool Equal(T x, T y) noexcept {
 		static_assert(std::is_floating_point_v< T >);
 		return std::numeric_limits< T >::epsilon() >= abs(x - y);
 	}
 
 	template< typename T >
-	constexpr T exp(T x, std::size_t n) noexcept {
+	constexpr T Sqr(T x) noexcept {
+		return x * x;
+	}
+
+	template< typename T >
+	constexpr T Exp(T x, std::size_t n) noexcept {
 		static_assert(std::is_floating_point_v< T >);
 
 		//          inf x^n   inf
@@ -39,7 +44,7 @@ namespace maml {
 		T sum_old(-1);
 		T sum(0);
 		T ci(1);
-		for (std::size_t i = 0u; i < n && !equal(sum_old, sum); ++i) {
+		for (std::size_t i = 0u; i < n && !Equal(sum_old, sum); ++i) {
 			sum_old = sum;
 			sum += ci;
 			ci *= x / (i + 1);
@@ -49,19 +54,19 @@ namespace maml {
 	}
 
 	template< typename T >
-	constexpr T cos(T x, std::size_t n) noexcept {
+	constexpr T Cos(T x, std::size_t n) noexcept {
 		static_assert(std::is_floating_point_v< T >);
 
 		//          inf  (-1)^i            inf
 		// cos(x) = sum -------- x^(2*i) = sum ci
 		//          i=0  (2*i)!            i=0
 		
-		const T x2 = x * x;
+		const T x2 = Sqr(x);
 
 		T sum_old(-1);
 		T sum(0);
 		T ci(1);
-		for (std::size_t i = 0u; i < n && !equal(sum_old, sum); ++i) {
+		for (std::size_t i = 0u; i < n && !Equal(sum_old, sum); ++i) {
 			sum_old = sum;
 			sum += ci;
 			ci *= -x2;
@@ -72,19 +77,19 @@ namespace maml {
 	}
 
 	template< typename T >
-	constexpr T sin(T x, std::size_t n) noexcept {
+	constexpr T Sin(T x, std::size_t n) noexcept {
 		static_assert(std::is_floating_point_v< T >);
 
 		//          inf  (-1)^i              inf
 		// sin(x) = sum -------- x^(2*i+1) = sum ci
 		//          i=0 (2*i+1)!             i=0
 		
-		const T x2 = x * x;
+		const T x2 = Sqr(x);
 
 		T sum_old(-1);
 		T sum(0);
 		T ci(x);
-		for (std::size_t i = 0u; i < n && !equal(sum_old, sum); ++i) {
+		for (std::size_t i = 0u; i < n && !Equal(sum_old, sum); ++i) {
 			sum_old = sum;
 			sum += ci;
 			ci *= -x2;
@@ -95,19 +100,19 @@ namespace maml {
 	}
 
 	template< typename T >
-	constexpr T cosh(T x, std::size_t n) noexcept {
+	constexpr T Cosh(T x, std::size_t n) noexcept {
 		static_assert(std::is_floating_point_v< T >);
 
 		//           inf  x^(2*i)   inf
 		// cosh(x) = sum -------- = sum ci
 		//           i=0  (2*i)!    i=0
 		
-		const T x2 = x * x;
+		const T x2 = Sqr(x);
 
 		T sum_old(-1);
 		T sum(0);
 		T ci(1);
-		for (std::size_t i = 0u; i < n && !equal(sum_old, sum); ++i) {
+		for (std::size_t i = 0u; i < n && !Equal(sum_old, sum); ++i) {
 			sum_old = sum;
 			sum += ci;
 			ci *= x2;
@@ -118,19 +123,19 @@ namespace maml {
 	}
 
 	template< typename T >
-	constexpr T sinh(T x, std::size_t n) noexcept {
+	constexpr T Sinh(T x, std::size_t n) noexcept {
 		static_assert(std::is_floating_point_v< T >);
 
 		//           inf x^(2*i+1)  inf
 		// sinh(x) = sum -------- = sum ci
 		//           i=0 (2*i+1)!   i=0
 		
-		const T x2 = x * x;
+		const T x2 = Sqr(x);
 
 		T sum_old(-1);
 		T sum(0);
 		T ci(x);
-		for (std::size_t i = 0u; i < n && !equal(sum_old, sum); ++i) {
+		for (std::size_t i = 0u; i < n && !Equal(sum_old, sum); ++i) {
 			sum_old = sum;
 			sum += ci;
 			ci *= x2;
