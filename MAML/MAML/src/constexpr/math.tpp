@@ -17,24 +17,54 @@
 namespace maml {
 
 	template< typename T >
-	constexpr T Abs(T x) noexcept {
+	constexpr const T Abs(T x) noexcept {
 		static_assert(!std::is_unsigned_v< T >);
 		return (0 <= x) ? x : -x;
 	}
 
 	template< typename T >
-	constexpr bool Equal(T x, T y) noexcept {
-		static_assert(std::is_floating_point_v< T >);
-		return std::numeric_limits< T >::epsilon() >= abs(x - y);
+	constexpr const T Min(T x) noexcept {
+		return x;
+	}
+
+	template< typename T, typename... Ts >
+	constexpr const T Min(T x, T y, Ts... args) noexcept {
+		return Min(x <= y ? x : y, args...);
 	}
 
 	template< typename T >
-	constexpr T Sqr(T x) noexcept {
+	constexpr const T Max(T x) noexcept {
+		return x;
+	}
+
+	template< typename T, typename... Ts >
+	constexpr const T Max(T x, T y, Ts... args) noexcept {
+		return Max(x >= y ? x : y, args...);
+	}
+
+	template< typename T >
+	constexpr const T Clamp(T x, T low, T high) noexcept {
+		return Min(Max(x, low), high);
+	}
+
+	template< typename T >
+	constexpr const T Saturate(T x) noexcept {
+		return Clamp(x, T(0), T(1));
+	}
+
+	template< typename T >
+	constexpr bool Equal(T x, T y) noexcept {
+		static_assert(std::is_floating_point_v< T >);
+		return std::numeric_limits< T >::epsilon() >= Abs(x - y);
+	}
+
+	template< typename T >
+	constexpr const T Sqr(T x) noexcept {
 		return x * x;
 	}
 
 	template< typename T >
-	constexpr T Exp(T x, std::size_t n) noexcept {
+	constexpr const T Exp(T x, std::size_t n) noexcept {
 		static_assert(std::is_floating_point_v< T >);
 
 		//          inf x^n   inf
@@ -54,7 +84,24 @@ namespace maml {
 	}
 
 	template< typename T >
-	constexpr T Cos(T x, std::size_t n) noexcept {
+	constexpr const T Log(T x, std::size_t n) noexcept {
+		return 0; //TODO
+	}
+
+	template< typename T >
+	constexpr const T Pow(T x, T exponent, std::size_t n) noexcept {
+		static_assert(std::is_floating_point_v< T >);
+		return Exp(exponent * Log(x, n), n);
+	}
+
+	template< typename T >
+	constexpr const T Sqrt(T x, std::size_t n) noexcept {
+		static_assert(std::is_floating_point_v< T >);
+		return Pow(x, T(0.5), n);
+	}
+
+	template< typename T >
+	constexpr const T Cos(T x, std::size_t n) noexcept {
 		static_assert(std::is_floating_point_v< T >);
 
 		//          inf  (-1)^i            inf
@@ -77,7 +124,7 @@ namespace maml {
 	}
 
 	template< typename T >
-	constexpr T Sin(T x, std::size_t n) noexcept {
+	constexpr const T Sin(T x, std::size_t n) noexcept {
 		static_assert(std::is_floating_point_v< T >);
 
 		//          inf  (-1)^i              inf
@@ -100,7 +147,7 @@ namespace maml {
 	}
 
 	template< typename T >
-	constexpr T Cosh(T x, std::size_t n) noexcept {
+	constexpr const T Cosh(T x, std::size_t n) noexcept {
 		static_assert(std::is_floating_point_v< T >);
 
 		//           inf  x^(2*i)   inf
@@ -123,7 +170,7 @@ namespace maml {
 	}
 
 	template< typename T >
-	constexpr T Sinh(T x, std::size_t n) noexcept {
+	constexpr const T Sinh(T x, std::size_t n) noexcept {
 		static_assert(std::is_floating_point_v< T >);
 
 		//           inf x^(2*i+1)  inf

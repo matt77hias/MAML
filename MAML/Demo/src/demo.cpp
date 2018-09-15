@@ -29,7 +29,7 @@ int main() {
 	constexpr H32 h2(3.0f, 4.0f);
 	constexpr H32 hmul = h1 * h2;
 
-	constexpr F32 s = maml::sin(3.14f);
+	constexpr F32 s = maml::Sin(3.14f);
 
 	return 0;
 }
