@@ -84,14 +84,36 @@ namespace maml {
 	}
 
 	template< typename T >
-	constexpr const T Log(T x, std::size_t n) noexcept {
+	constexpr const T Ln(T x, std::size_t n) noexcept {
 		return 0; //TODO
+	}
+
+	template< typename T >
+	constexpr const T Log(T x, std::size_t n) noexcept {
+		return Ln(x, n);
+	}
+
+	template< typename T >
+	constexpr const T Log(T x, T base, std::size_t n) noexcept {
+		return Ln(x, n) / Ln(base, n);
+	}
+
+	template< typename T >
+	constexpr const T Log2(T x, std::size_t n) noexcept {
+		constexpr T inv_ln2(1.44269504089);
+		return Ln(x, n) * inv_ln2;
+	}
+
+	template< typename T >
+	constexpr const T Log10(T x, std::size_t n) noexcept {
+		constexpr T inv_ln10(0.4342944819);
+		return Ln(x, n) * inv_ln10;
 	}
 
 	template< typename T >
 	constexpr const T Pow(T x, T exponent, std::size_t n) noexcept {
 		static_assert(std::is_floating_point_v< T >);
-		return Exp(exponent * Log(x, n), n);
+		return Exp(exponent * Ln(x, n), n);
 	}
 
 	template< typename T >

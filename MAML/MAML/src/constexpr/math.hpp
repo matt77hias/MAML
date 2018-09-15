@@ -16,6 +16,8 @@
 //-----------------------------------------------------------------------------
 namespace maml {
 
+	constexpr std::size_t g_max_nb_factors = 20u;
+
 	template< typename T >
 	constexpr const T Abs(T x) noexcept;
 
@@ -38,28 +40,40 @@ namespace maml {
 	constexpr const T Sqr(T x) noexcept;
 
 	template< typename T >
-	constexpr const T Exp(T x, std::size_t n = 20u) noexcept;
+	constexpr const T Exp(T x, std::size_t n = g_max_nb_factors) noexcept;
 
 	template< typename T >
-	constexpr const T Log(T x, std::size_t n = 20u) noexcept;
+	constexpr const T Ln(T x, std::size_t n = g_max_nb_factors) noexcept;
 
 	template< typename T >
-	constexpr const T Pow(T x, T exponent, std::size_t n = 20u) noexcept;
+	constexpr const T Log(T x, std::size_t n = g_max_nb_factors) noexcept;
 
 	template< typename T >
-	constexpr const T Sqrt(T x, std::size_t n = 20u) noexcept;
+	constexpr const T Log(T x, T base, std::size_t n = g_max_nb_factors) noexcept;
 
 	template< typename T >
-	constexpr const T Cos(T x, std::size_t n = 20u) noexcept;
+	constexpr const T Log2(T x, std::size_t n = g_max_nb_factors) noexcept;
 
 	template< typename T >
-	constexpr const T Sin(T x, std::size_t n = 20u) noexcept;
+	constexpr const T Log10(T x, std::size_t n = g_max_nb_factors) noexcept;
 
 	template< typename T >
-	constexpr const T Cosh(T x, std::size_t n = 20u) noexcept;
+	constexpr const T Pow(T x, T exponent, std::size_t n = g_max_nb_factors) noexcept;
 
 	template< typename T >
-	constexpr const T Sinh(T x, std::size_t n = 20u) noexcept;
+	constexpr const T Sqrt(T x, std::size_t n = g_max_nb_factors) noexcept;
+
+	template< typename T >
+	constexpr const T Cos(T x, std::size_t n = g_max_nb_factors) noexcept;
+
+	template< typename T >
+	constexpr const T Sin(T x, std::size_t n = g_max_nb_factors) noexcept;
+
+	template< typename T >
+	constexpr const T Cosh(T x, std::size_t n = g_max_nb_factors) noexcept;
+
+	template< typename T >
+	constexpr const T Sinh(T x, std::size_t n = g_max_nb_factors) noexcept;
 }
 
 //-----------------------------------------------------------------------------
