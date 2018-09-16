@@ -13,7 +13,7 @@
 //-----------------------------------------------------------------------------
 // Declarations and Definitions
 //-----------------------------------------------------------------------------
-namespace mage {
+namespace maml {
 
 	//-------------------------------------------------------------------------
 	// Array Utilities
@@ -183,11 +183,11 @@ namespace mage {
 namespace std {
 
 	template< typename T, std::size_t N, std::size_t A >
-	struct tuple_size< mage::Array< T, N, A > >
+	struct tuple_size< maml::Array< T, N, A > >
 		: public integral_constant< std::size_t, N > {};
 
 	template< std::size_t I, typename T, std::size_t N, std::size_t A >
-	struct tuple_element< I, mage::Array< T, N, A > > {
+	struct tuple_element< I, maml::Array< T, N, A > > {
 
 	public:
 
