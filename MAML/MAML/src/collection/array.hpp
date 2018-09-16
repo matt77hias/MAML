@@ -13,7 +13,7 @@
 //-----------------------------------------------------------------------------
 // Declarations and Definitions
 //-----------------------------------------------------------------------------
-namespace maml {
+namespace mage {
 
 	//-------------------------------------------------------------------------
 	// Array Utilities
@@ -119,7 +119,7 @@ namespace maml {
 	#pragma warning( disable : 4324 ) // Added padding.
 
 	template< typename T, std::size_t N, std::size_t A = alignof(T),
-		      typename = std::enable_if_t< (N > 1) > >
+		      typename = std::enable_if_t< (N > 1u) > >
 	struct alignas(A) Array : public std::array< T, N > {
 
 	public:
@@ -183,11 +183,11 @@ namespace maml {
 namespace std {
 
 	template< typename T, std::size_t N, std::size_t A >
-	struct tuple_size< maml::Array< T, N, A > >
+	struct tuple_size< mage::Array< T, N, A > >
 		: public integral_constant< std::size_t, N > {};
 
 	template< std::size_t I, typename T, std::size_t N, std::size_t A >
-	struct tuple_element< I, maml::Array< T, N, A > > {
+	struct tuple_element< I, mage::Array< T, N, A > > {
 
 	public:
 
