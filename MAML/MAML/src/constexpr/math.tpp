@@ -32,7 +32,7 @@ namespace maml {
 	template< typename T, typename... Ts >
 	[[nodicard]]
 	constexpr const T Min(T x, T y, Ts... args) noexcept {
-		return Min(x <= y ? x : y, args...);
+		return Min((x <= y ? x : y), args...);
 	}
 
 	template< typename T >
@@ -44,7 +44,7 @@ namespace maml {
 	template< typename T, typename... Ts >
 	[[nodicard]]
 	constexpr const T Max(T x, T y, Ts... args) noexcept {
-		return Max(x >= y ? x : y, args...);
+		return Max((x >= y ? x : y), args...);
 	}
 
 	template< typename T >
