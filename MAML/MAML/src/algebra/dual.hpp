@@ -145,7 +145,7 @@ namespace maml {
 
 		[[nodiscard]]
 		constexpr bool operator==(const Dual& v) const {
-			return Re() == v.Re()&&  Du() == v.Du();
+			return Re() == v.Re() && Du() == v.Du();
 		}
 		[[nodiscard]]
 		constexpr bool operator!=(const Dual& v) const {
