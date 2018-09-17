@@ -141,7 +141,7 @@ namespace maml {
 
 		[[nodiscard]]
 		constexpr bool operator==(const Hyperbolic& v) const {
-			return Re() == v.Re()&&  Im() == v.Im();
+			return Re() == v.Re() && Im() == v.Im();
 		}
 		[[nodiscard]]
 		constexpr bool operator!=(const Hyperbolic& v) const {
