@@ -14,6 +14,7 @@
 //-----------------------------------------------------------------------------
 #pragma region
 
+#include <immintrin.h>
 #include <xmmintrin.h>
 
 #pragma endregion
@@ -23,130 +24,159 @@
 //-----------------------------------------------------------------------------
 namespace maml {
 
-	//-------------------------------------------------------------------------
-	// Declarations and Definitions: Vector
-	//-------------------------------------------------------------------------
-
-	struct alignas(16) SIMD32x4 final {
+	struct alignas(16) F32x4S {
 
 	public:
 
-		SIMD32x4(F32 x) noexcept;
-		SIMD32x4(S32 x) noexcept;
-		SIMD32x4(U32 x) noexcept;
+		//---------------------------------------------------------------------
+		// Constructors and Destructors
+		//---------------------------------------------------------------------
 
-		SIMD32x4(F32 x, F32 y) noexcept;
-		SIMD32x4(S32 x, S32 y) noexcept;
-		SIMD32x4(U32 x, U32 y) noexcept;
-		explicit SIMD32x4(const F32x2 &v) noexcept;
-		explicit SIMD32x4(const S32x2 &v) noexcept;
-		explicit SIMD32x4(const U32x2 &v) noexcept;
-
-		SIMD32x4(F32 x, F32 y, F32 z) noexcept;
-		SIMD32x4(S32 x, S32 y, S32 z) noexcept;
-		SIMD32x4(U32 x, U32 y, U32 z) noexcept;
-		explicit SIMD32x4(const F32x3 &v) noexcept;
-		explicit SIMD32x4(const S32x3 &v) noexcept;
-		explicit SIMD32x4(const U32x3 &v) noexcept;
-
-		SIMD32x4(F32 x, F32 y, F32 z, F32 w) noexcept;
-		SIMD32x4(S32 x, S32 y, S32 z, S32 w) noexcept;
-		SIMD32x4(U32 x, U32 y, U32 z, U32 w) noexcept;
-		explicit SIMD32x4(const F32x4 &v) noexcept;
-		explicit SIMD32x4(const S32x4 &v) noexcept;
-		explicit SIMD32x4(const U32x4 &v) noexcept;
-
-		constexpr SIMD32x4(const __m128 &v) noexcept
+		explicit F32x4S(F32 xyzw = 0.0f) noexcept
+			: F32x4S(_mm_set_ps1(xyzw)) {}
+		F32x4S(F32 x, F32 y, F32 z, F32 w) noexcept
+			: F32x4S(_mm_set_ps(w, z, y, x)) {}
+		F32x4S(const F32x4& v) noexcept
+			: F32x4S(v[0u], v[1u], v[2u], v[3u]) {}
+		F32x4S(__m128 v) noexcept
 			: m_v(v) {}
-		SIMD32x4(const SIMD32x4 &v) noexcept = default;
-		SIMD32x4(SIMD32x4 &&v) noexcept = default;
+		
+		F32x4S(const F32x4S& v) noexcept = default;
+		F32x4S(F32x4S&& v) noexcept = default;
+		~F32x4S() = default;
 
-		~SIMD32x4() = default;
+		//---------------------------------------------------------------------
+		// Assignment Operators
+		//---------------------------------------------------------------------
 
-		SIMD32x4 &operator=(const SIMD32x4 &v) = default;
-		SIMD32x4 &operator=(SIMD32x4 &&v) = default;
+		F32x4S& operator=(const F32x4S& v) = default;
+		F32x4S& operator=(F32x4S&& v) = default;
 
 		//---------------------------------------------------------------------
 		// Member Methods
 		//---------------------------------------------------------------------
 
-		const SIMD32x4 operator-() const noexcept {
-			return SIMD32x4(_mm_sub_ps(_mm_setzero_ps(), m_v));
+		[[nodiscard]]
+		F32 __vectorcall X() const noexcept {
+			return _mm_cvtss_f32(m_v);
 		}
-		
-		const SIMD32x4 __vectorcall operator+(const SIMD32x4 &v) const noexcept {
-			return SIMD32x4(_mm_add_ps(m_v, v.m_v));
+		[[nodiscard]]
+		F32 __vectorcall Y() const noexcept {
+			return _mm_cvtss_f32(_mm_permute_ps(m_v, _MM_SHUFFLE(1, 1, 1, 1)));
 		}
-		const SIMD32x4 __vectorcall operator-(const SIMD32x4 &v) const noexcept {
-			return SIMD32x4(_mm_sub_ps(m_v, v.m_v));
+		[[nodiscard]]
+		F32 __vectorcall Z() const noexcept {
+			return _mm_cvtss_f32(_mm_permute_ps(m_v, _MM_SHUFFLE(2, 2, 2, 2)));
 		}
-		const SIMD32x4 __vectorcall operator*(const SIMD32x4 &v) const noexcept {
-			return SIMD32x4(_mm_mul_ps(m_v, v.m_v));
-		}
-		const SIMD32x4 __vectorcall operator/(const SIMD32x4 &v) const noexcept {
-			return SIMD32x4(_mm_div_ps(m_v, v.m_v));
-		}
-		
-		const SIMD32x4 operator+(F32 a) const noexcept {
-			return SIMD32x4(_mm_add_ps(m_v, _mm_set_ps1(a)));
-		}
-		const SIMD32x4 operator-(F32 a) const noexcept {
-			return SIMD32x4(_mm_sub_ps(m_v, _mm_set_ps1(a)));
-		}
-		const SIMD32x4 operator*(F32 a) const noexcept {
-			return SIMD32x4(_mm_mul_ps(m_v, _mm_set_ps1(a)));
-		}
-		const SIMD32x4 operator/(F32 a) const noexcept {
-			return SIMD32x4(_mm_div_ps(m_v, _mm_set_ps1(a)));
+		[[nodiscard]]
+		F32 __vectorcall W() const noexcept {
+			return _mm_cvtss_f32(_mm_permute_ps(m_v, _MM_SHUFFLE(3, 3, 3, 3)));
 		}
 
-		friend const SIMD32x4 __vectorcall operator+(F32 a, const SIMD32x4 &v) noexcept {
-			return SIMD32x4(_mm_add_ps(_mm_set_ps1(a), v.m_v));
+		[[nodiscard]]
+		const F32x4S __vectorcall operator+() const noexcept {
+			return m_v;
 		}
-		friend const SIMD32x4 __vectorcall operator-(F32 a, const SIMD32x4 &v) noexcept {
-			return SIMD32x4(_mm_sub_ps(_mm_set_ps1(a), v.m_v));
+		[[nodiscard]]
+		const F32x4S __vectorcall operator-() const noexcept {
+			return _mm_sub_ps(_mm_setzero_ps(), m_v);
 		}
-		friend const SIMD32x4 __vectorcall operator*(F32 a, const SIMD32x4 &v) noexcept {
-			return SIMD32x4(_mm_mul_ps(_mm_set_ps1(a), v.m_v));
+		
+		[[nodiscard]]
+		const F32x4S __vectorcall operator+(const F32x4S& v) const noexcept {
+			return _mm_add_ps(m_v, v.m_v);
 		}
-		friend const SIMD32x4 __vectorcall operator/(F32 a, const SIMD32x4 &v) noexcept {
-			return SIMD32x4(_mm_div_ps(_mm_set_ps1(a), v.m_v));
+		[[nodiscard]]
+		const F32x4S __vectorcall operator-(const F32x4S& v) const noexcept {
+			return _mm_sub_ps(m_v, v.m_v);
+		}
+		[[nodiscard]]
+		const F32x4S __vectorcall operator*(const F32x4S& v) const noexcept {
+			return _mm_mul_ps(m_v, v.m_v);
+		}
+		[[nodiscard]]
+		const F32x4S __vectorcall operator/(const F32x4S& v) const noexcept {
+			return _mm_div_ps(m_v, v.m_v);
+		}
+		
+		[[nodiscard]]
+		const F32x4S __vectorcall operator+(F32 a) const noexcept {
+			return _mm_add_ps(m_v, _mm_set_ps1(a));
+		}
+		[[nodiscard]]
+		const F32x4S __vectorcall operator-(F32 a) const noexcept {
+			return _mm_sub_ps(m_v, _mm_set_ps1(a));
+		}
+		[[nodiscard]]
+		const F32x4S __vectorcall operator*(F32 a) const noexcept {
+			return _mm_mul_ps(m_v, _mm_set_ps1(a));
+		}
+		[[nodiscard]]
+		const F32x4S __vectorcall operator/(F32 a) const noexcept {
+			return _mm_div_ps(m_v, _mm_set_ps1(a));
 		}
 
-		SIMD32x4 & __vectorcall operator+=(const SIMD32x4 &v) noexcept {
+		F32x4S& __vectorcall operator+=(const F32x4S& v) noexcept {
 			m_v = _mm_add_ps(m_v, v.m_v);
 			return *this;
 		}
-		SIMD32x4 & __vectorcall operator-=(const SIMD32x4 &v) noexcept {
+		F32x4S& __vectorcall operator-=(const F32x4S& v) noexcept {
 			m_v = _mm_sub_ps(m_v, v.m_v);
 			return *this;
 		}
-		SIMD32x4 & __vectorcall operator*=(const SIMD32x4 &v) noexcept {
+		F32x4S& __vectorcall operator*=(const F32x4S& v) noexcept {
 			m_v = _mm_mul_ps(m_v, v.m_v);
 			return *this;
 		}
-		SIMD32x4 & __vectorcall operator/=(const SIMD32x4 &v) noexcept {
+		F32x4S& __vectorcall operator/=(const F32x4S& v) noexcept {
 			m_v = _mm_div_ps(m_v, v.m_v);
 			return *this;
 		}
 		
-		SIMD32x4 &operator+=(F32 a) noexcept {
+		F32x4S& __vectorcall operator+=(F32 a) noexcept {
 			m_v = _mm_add_ps(m_v, _mm_set_ps1(a));
 			return *this;
 		}
-		SIMD32x4 &operator-=(F32 a) noexcept {
+		F32x4S& __vectorcall operator-=(F32 a) noexcept {
 			m_v = _mm_sub_ps(m_v, _mm_set_ps1(a));
 			return *this;
 		}
-		SIMD32x4 &operator*=(F32 a) noexcept {
+		F32x4S& __vectorcall operator*=(F32 a) noexcept {
 			m_v = _mm_mul_ps(m_v, _mm_set_ps1(a));
 			return *this;
 		}
-		SIMD32x4 &operator/=(F32 a) noexcept {
+		F32x4S& __vectorcall operator/=(F32 a) noexcept {
 			m_v = _mm_div_ps(m_v, _mm_set_ps1(a));
 			return *this;
 		}
 
+		[[nodiscard]]
+		bool __vectorcall operator==(const F32x4S& v) const {
+			const __m128i results = _mm_castps_si128(_mm_cmpeq_ps(m_v, v.m_v));
+			return (0xFFFF == _mm_movemask_epi8(results));
+		}
+		[[nodiscard]]
+		bool __vectorcall operator!=(const F32x4S& v) const {
+			return !(*this == v);
+		}
+
 		__m128 m_v;
 	};
+
+	[[nodiscard]]
+	const F32x4S __vectorcall operator+(F32 a, const F32x4S& v) noexcept {
+		return _mm_add_ps(_mm_set_ps1(a), v.m_v);
+	}
+	[[nodiscard]]
+	const F32x4S __vectorcall operator-(F32 a, const F32x4S& v) noexcept {
+		return _mm_sub_ps(_mm_set_ps1(a), v.m_v);
+	}
+	[[nodiscard]]
+	const F32x4S __vectorcall operator*(F32 a, const F32x4S& v) noexcept {
+		return _mm_mul_ps(_mm_set_ps1(a), v.m_v);
+	}
+	[[nodiscard]]
+	const F32x4S __vectorcall operator/(F32 a, const F32x4S& v) noexcept {
+		return _mm_div_ps(_mm_set_ps1(a), v.m_v);
+	}
 }

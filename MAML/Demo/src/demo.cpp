@@ -11,9 +11,9 @@ using namespace maml;
 
 int main() {
 
-	const SIMD32x4 simd1 = _mm_set_ps1(5.0f);
-	const SIMD32x4 simd2 = _mm_set_ps1(7.0f);
-	const SIMD32x4 smul  = simd1 * simd2;
+	const F32x4S simd1(5.0f);
+	const F32x4S simd2(7.0f);
+	const F32x4S smul = simd1 * simd2;
 	
 	constexpr C32 c1(1.0f, 2.0f);
 	constexpr C32 c2(3.0f, 4.0f);
