@@ -43,14 +43,14 @@ namespace maml {
 		
 		F32x4S(const F32x4S& v) noexcept = default;
 		F32x4S(F32x4S&& v) noexcept = default;
-		~F32x4S() noexcept = default;
+		~F32x4S() = default;
 
 		//---------------------------------------------------------------------
 		// Assignment Operators
 		//---------------------------------------------------------------------
 
-		F32x4S& operator=(const F32x4S& v) = default;
-		F32x4S& operator=(F32x4S&& v) = default;
+		F32x4S& operator=(const F32x4S& v) noexcept = default;
+		F32x4S& operator=(F32x4S&& v) noexcept = default;
 
 		//---------------------------------------------------------------------
 		// Member Methods
