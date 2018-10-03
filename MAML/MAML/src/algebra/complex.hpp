@@ -44,8 +44,8 @@ namespace maml {
 		// Assignment Operators
 		//---------------------------------------------------------------------
 
-		Complex& operator=(const Complex& v) = default;
-		Complex& operator=(Complex&& v) = default;
+		Complex& operator=(const Complex& v) noexcept = default;
+		Complex& operator=(Complex&& v) noexcept = default;
 
 		//---------------------------------------------------------------------
 		// Member Methods
