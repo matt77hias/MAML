@@ -38,7 +38,7 @@ namespace maml {
 		constexpr explicit Complex(const Complex< U >& v) noexcept
 			: Complex(static_cast< T >(v.Re()),
 				      static_cast< T >(v.Im())) {}
-		~Complex() noexcept = default;
+		~Complex() = default;
 
 		//---------------------------------------------------------------------
 		// Assignment Operators
