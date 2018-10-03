@@ -1,16 +1,16 @@
 #pragma once
 
 //-----------------------------------------------------------------------------
-// Engine Includes
+// Includes
 //-----------------------------------------------------------------------------
 #pragma region
 
-#include "math.hpp"
+#include "type\types.hpp"
 
 #pragma endregion
 
 //-----------------------------------------------------------------------------
-// Engine Declarations and Definitions
+// Declarations and Definitions
 //-----------------------------------------------------------------------------
 namespace maml {
 
