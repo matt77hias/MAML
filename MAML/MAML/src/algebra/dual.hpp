@@ -34,7 +34,7 @@ namespace maml {
 		constexpr explicit Dual(const Dual< U >& v) noexcept
 			: Dual(static_cast< T >(v.Re()),
 				   static_cast< T >(v.Du())) {}
-		~Dual() = default;
+		~Dual() noexcept = default;
 
 		//---------------------------------------------------------------------
 		// Assignment Operators
