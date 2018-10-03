@@ -168,7 +168,7 @@ namespace maml {
 		constexpr explicit Array(const Array< FromT, N, FromA >& a) noexcept
 			: std::array< T, N >(StaticCastArray< T >(a)) {}
 
-		~Array() = default;
+		~Array() noexcept = default;
 		
 		Array& operator=(const Array& a) noexcept = default;
 
