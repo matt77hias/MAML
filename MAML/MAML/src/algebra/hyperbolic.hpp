@@ -38,7 +38,7 @@ namespace maml {
 		constexpr explicit Hyperbolic(const Hyperbolic< U >& v) noexcept
 			: Hyperbolic(static_cast< T >(v.Re()),
 				         static_cast< T >(v.Im())) {}
-		~Hyperbolic() = default;
+		~Hyperbolic() noexcept = default;
 
 		//---------------------------------------------------------------------
 		// Assignment Operators
