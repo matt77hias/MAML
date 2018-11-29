@@ -15,7 +15,7 @@
 ## Development
 * **Platform**: Windows 10 32 Bit and 64 Bit
 * **Programming Language**: ISO C++ Latest Draft Standard (> C++17)
-* **Compiler**: MSVC++ 15.9.2
+* **Compiler**: MSVC++ 15.9.3
 * **IDE**: Visual Studio 2017
 
 ## Features
