@@ -8,7 +8,7 @@
 [co]: https://www.codacy.com/app/matt77hias/MAML?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=matt77hias/MAML&amp;utm_campaign=Badge_Grade
 [li]: https://raw.githubusercontent.com/matt77hias/MAML/master/LICENSE.txt
 
-# MAML - Matthias Advanced Math Library
+# MAML
 
 ## About
 
