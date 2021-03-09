@@ -41,7 +41,7 @@ namespace maml {
 			: Complex(xy, xy) {}
 		
 		constexpr Complex(T x, T y) noexcept
-			: Array(x, y) {}
+			: Array< T, 2u >(x, y) {}
 		
 		constexpr Complex(const Complex& v) noexcept = default;
 		
