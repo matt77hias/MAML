@@ -32,7 +32,7 @@ namespace maml {
 			: Dual(xy, xy) {}
 		
 		constexpr Dual(T x, T y) noexcept
-			: Array(x, y) {}
+			: Array< T, 2u >(x, y) {}
 		
 		constexpr Dual(const Dual& v) noexcept = default;
 		
