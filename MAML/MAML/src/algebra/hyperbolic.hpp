@@ -59,22 +59,22 @@ namespace maml {
 
 		[[nodiscard]]
 		T& Re() noexcept {
-			return operator[](0u);
+			return (*this)[0u];
 		}
 		
 		[[nodiscard]]
 		constexpr const T Re() const noexcept {
-			return operator[](0u);
+			return (*this)[0u];
 		}
 		
 		[[nodiscard]]
 		T& Im() noexcept {
-			return operator[](1u);
+			return (*this)[1u];
 		}
 		
 		[[nodiscard]]
 		constexpr const T Im() const noexcept {
-			return operator[](1u);
+			return (*this)[1u];
 		}
 
 		[[nodiscard]]
