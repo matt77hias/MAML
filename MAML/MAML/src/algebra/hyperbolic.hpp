@@ -32,7 +32,7 @@ namespace maml {
 			: Hyperbolic(xy, xy) {}
 		
 		constexpr Hyperbolic(T x, T y) noexcept
-			: Array(x, y) {}
+			: Array< T, 2u >(x, y) {}
 		
 		constexpr Hyperbolic(const Hyperbolic& v) noexcept = default;
 		
