@@ -1,11 +1,11 @@
 [![Build status][s1]][av] [![Code quality][s2]][co] [![License][s3]][li]
 
 [s1]: https://ci.appveyor.com/api/projects/status/8v9a0idnftj5s114?svg=true
-[s2]: https://api.codacy.com/project/badge/Grade/52e6428f56114d57b4b3eb0c26ec02ed
+[s2]: https://app.codacy.com/project/badge/Grade/52e6428f56114d57b4b3eb0c26ec02ed
 [s3]: https://img.shields.io/badge/license-GPL%203.0-blue.svg
 
 [av]: https://ci.appveyor.com/project/matt77hias/MAML
-[co]: https://www.codacy.com/app/matt77hias/MAML?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=matt77hias/MAML&amp;utm_campaign=Badge_Grade
+[co]: https://app.codacy.com/gh/matt77hias/MAML/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade
 [li]: https://raw.githubusercontent.com/matt77hias/MAML/master/LICENSE.txt
 
 # MAML
